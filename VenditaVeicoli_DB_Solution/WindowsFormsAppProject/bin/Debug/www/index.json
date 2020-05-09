@@ -1,0 +1,38 @@
+[
+  {
+    "MarcaSella": "Cavallino",
+    "Marca": "DUCATI",
+    "Modello": "Squalo",
+    "Colore": "Nero",
+    "Cilindarata": 1000,
+    "PotenzaKw": 75.2,
+    "Immatricolazione": "0001-01-01T00:00:00",
+    "IsUsato": false,
+    "IsKmZero": false,
+    "KmPercorsi1": 0
+  },
+  {
+    "MarcaSella": "Quintino",
+    "Marca": "HONDA",
+    "Modello": "Tsunami",
+    "Colore": "Rosso",
+    "Cilindarata": 1000,
+    "PotenzaKw": 120.0,
+    "Immatricolazione": "0001-01-01T00:00:00",
+    "IsUsato": false,
+    "IsKmZero": false,
+    "KmPercorsi1": 0
+  },
+  {
+    "NumAirBag": 8,
+    "Marca": "JEEP",
+    "Modello": "Compass",
+    "Colore": "Blue",
+    "Cilindarata": 2400,
+    "PotenzaKw": 160.1,
+    "Immatricolazione": "0001-01-01T00:00:00",
+    "IsUsato": false,
+    "IsKmZero": false,
+    "KmPercorsi1": 0
+  }
+]

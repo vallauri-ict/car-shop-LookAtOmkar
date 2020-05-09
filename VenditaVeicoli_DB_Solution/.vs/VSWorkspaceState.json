@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ConsoleAppProject",
+    "\\VenditaVeicoliDLLProject",
+    "\\WindowsFormsAppProject",
+    "\\WindowsFormsAppProject\\bin",
+    "\\WindowsFormsAppProject\\bin\\Debug",
+    "\\WindowsFormsAppProject\\bin\\Debug\\www",
+    "\\WindowsFormsAppProject\\bin\\Debug\\www\\css",
+    "\\WindowsFormsAppProject\\bin\\Debug\\www\\js",
+    "\\WindowsFormsAppProject\\bin\\Release"
+  ],
+  "SelectedNode": "\\Veicoli.accdb",
+  "PreviewInSolutionExplorer": false
+}

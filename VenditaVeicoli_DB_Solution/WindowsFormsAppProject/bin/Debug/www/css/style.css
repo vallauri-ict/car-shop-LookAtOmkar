@@ -1,0 +1,85 @@
+﻿body
+{
+    background-color:lightyellow;
+}
+
+h2, h5 {
+    text-align: center;
+    font-family: 'Microsoft Sans Serif';
+    color:white;
+    text-decoration:solid;
+}
+h5{
+    font-size:15pt;
+}
+.DUCATI {
+    background-image: url("ducati1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.MERCEDES {
+    background-image: url("mercedes1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.HONDA {
+    background-image: url("honda1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.JEEP {
+    background-image: url("jeep1.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:center;
+}
+.Dettagli{
+    width:300px;
+    height:100px;
+    border:10px groove gold;
+    border-top:none;
+    position:absolute;
+    top:250px;
+    float:inherit;
+    background-color:white;
+}
+div{
+    height:250px;
+    width:300px;
+    float:inherit;
+    border:10px groove gold;
+    border-bottom:none;
+    font-size:10pt;
+    background-color:none;
+}
+#main-content{
+    width:100%;
+    float:left;
+    border:none;
+    margin:0 auto;
+    height:1000px;
+}
+body{
+    background-image: url("MainContent.jpg");
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+.Body-content {
+    width: 300px;
+    height: 350px;
+    margin: 10px;
+    margin-left:20px;
+    background-color: transparent;
+    background-image: none;
+    border: none;
+    position: relative;
+}
+footer{
+    width:100%;
+    background-color:#edd23c;
+    font-size:15pt;
+    font-family:'Microsoft Sans Serif';
+}
