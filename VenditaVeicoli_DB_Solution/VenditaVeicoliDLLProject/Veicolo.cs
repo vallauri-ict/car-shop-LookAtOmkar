@@ -21,9 +21,11 @@ namespace VenditaVeicoliDLLProject
         private bool isUsato;
         private bool isKmZero;
         private int KmPercorsi;
+        private int prezzo;
+        
         #endregion
 
-        public Veicolo(string marca, string modello, string colore, int cilindarata, double potenzaKw, DateTime immatricolazione, bool isUsato, bool isKmZero, int kmPercorsi)
+        public Veicolo(string marca, string modello, string colore, int cilindarata, double potenzaKw, DateTime immatricolazione, bool isUsato, bool isKmZero, int kmPercorsi,int prezzo)
         {
             this.Marca = marca;
             this.Modello = modello;
@@ -33,7 +35,9 @@ namespace VenditaVeicoliDLLProject
             this.Immatricolazione = immatricolazione;
             this.IsUsato = isUsato;
             this.IsKmZero = isKmZero;
-            KmPercorsi1 = kmPercorsi;
+            this.KmPercorsi1 = kmPercorsi;
+            this.Prezzo = prezzo;
+
         }
         public string Marca { get => marca.ToUpper(); set => marca = value; }
         public string Modello { get => modello; set => modello = value; }
@@ -44,6 +48,7 @@ namespace VenditaVeicoliDLLProject
         public bool IsUsato { get => isUsato; set => isUsato = value; }
         public bool IsKmZero { get => isKmZero; set => isKmZero = value; }
         public int KmPercorsi1 { get => KmPercorsi; set => KmPercorsi = value; }
+        public int Prezzo { get => prezzo; set => prezzo = value; }
 
         public override string ToString()
         {

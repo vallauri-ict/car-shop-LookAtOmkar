@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDialogAggiungi));
             this.cmbTipoVeicolo = new System.Windows.Forms.ComboBox();
             this.btnAnnulla = new System.Windows.Forms.Button();
             this.btnAggiungi = new System.Windows.Forms.Button();
@@ -58,7 +59,10 @@
             this.KMZeroSI = new System.Windows.Forms.RadioButton();
             this.KMZeroNO = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblPrezzo = new System.Windows.Forms.Label();
+            this.numUpDwPrice = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDwPrice)).BeginInit();
             this.SuspendLayout();
             // 
             // cmbTipoVeicolo
@@ -77,7 +81,7 @@
             // btnAnnulla
             // 
             this.btnAnnulla.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnAnnulla.Location = new System.Drawing.Point(118, 446);
+            this.btnAnnulla.Location = new System.Drawing.Point(118, 470);
             this.btnAnnulla.Name = "btnAnnulla";
             this.btnAnnulla.Size = new System.Drawing.Size(75, 23);
             this.btnAnnulla.TabIndex = 1;
@@ -87,7 +91,7 @@
             // 
             // btnAggiungi
             // 
-            this.btnAggiungi.Location = new System.Drawing.Point(215, 446);
+            this.btnAggiungi.Location = new System.Drawing.Point(215, 470);
             this.btnAggiungi.Name = "btnAggiungi";
             this.btnAggiungi.Size = new System.Drawing.Size(75, 23);
             this.btnAggiungi.TabIndex = 2;
@@ -235,7 +239,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(2, 386);
+            this.label3.Location = new System.Drawing.Point(2, 416);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 13);
             this.label3.TabIndex = 23;
@@ -244,7 +248,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(2, 412);
+            this.label4.Location = new System.Drawing.Point(2, 442);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 13);
             this.label4.TabIndex = 24;
@@ -306,7 +310,7 @@
             // KMZeroSI
             // 
             this.KMZeroSI.AutoSize = true;
-            this.KMZeroSI.Location = new System.Drawing.Point(94, 381);
+            this.KMZeroSI.Location = new System.Drawing.Point(94, 411);
             this.KMZeroSI.Name = "KMZeroSI";
             this.KMZeroSI.Size = new System.Drawing.Size(35, 17);
             this.KMZeroSI.TabIndex = 32;
@@ -318,7 +322,7 @@
             // KMZeroNO
             // 
             this.KMZeroNO.AutoSize = true;
-            this.KMZeroNO.Location = new System.Drawing.Point(152, 381);
+            this.KMZeroNO.Location = new System.Drawing.Point(152, 411);
             this.KMZeroNO.Name = "KMZeroNO";
             this.KMZeroNO.Size = new System.Drawing.Size(41, 17);
             this.KMZeroNO.TabIndex = 33;
@@ -330,18 +334,36 @@
             // 
             this.groupBox1.Controls.Add(this.UsatoNO);
             this.groupBox1.Controls.Add(this.UsatoSI);
-            this.groupBox1.Location = new System.Drawing.Point(70, 402);
+            this.groupBox1.Location = new System.Drawing.Point(70, 432);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(141, 25);
             this.groupBox1.TabIndex = 34;
             this.groupBox1.TabStop = false;
+            // 
+            // lblPrezzo
+            // 
+            this.lblPrezzo.AutoSize = true;
+            this.lblPrezzo.Location = new System.Drawing.Point(2, 391);
+            this.lblPrezzo.Name = "lblPrezzo";
+            this.lblPrezzo.Size = new System.Drawing.Size(54, 13);
+            this.lblPrezzo.TabIndex = 29;
+            this.lblPrezzo.Text = "PREZZO:";
+            // 
+            // numUpDwPrice
+            // 
+            this.numUpDwPrice.Location = new System.Drawing.Point(94, 389);
+            this.numUpDwPrice.Name = "numUpDwPrice";
+            this.numUpDwPrice.Size = new System.Drawing.Size(120, 20);
+            this.numUpDwPrice.TabIndex = 35;
             // 
             // FormDialogAggiungi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnAnnulla;
-            this.ClientSize = new System.Drawing.Size(302, 481);
+            this.ClientSize = new System.Drawing.Size(302, 505);
+            this.Controls.Add(this.numUpDwPrice);
+            this.Controls.Add(this.lblPrezzo);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.KMZeroNO);
             this.Controls.Add(this.KMZeroSI);
@@ -369,11 +391,13 @@
             this.Controls.Add(this.btnAggiungi);
             this.Controls.Add(this.btnAnnulla);
             this.Controls.Add(this.cmbTipoVeicolo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormDialogAggiungi";
             this.Text = "AGGIUNGI VEICOLO";
             this.Load += new System.EventHandler(this.FormDialogAggiungi_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDwPrice)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -411,5 +435,7 @@
         private System.Windows.Forms.RadioButton KMZeroSI;
         private System.Windows.Forms.RadioButton KMZeroNO;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lblPrezzo;
+        private System.Windows.Forms.NumericUpDown numUpDwPrice;
     }
 }

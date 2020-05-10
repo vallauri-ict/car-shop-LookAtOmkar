@@ -32,9 +32,9 @@ namespace WindowsFormsAppProject
             UtilsDatabase.CreaTabella();
             Moto m = new Moto();
             BindingListVeicoli.Add(m);
-            m = new Moto("HONDA","Tsunami","Rosso",1000,120,new DateTime(), false,false,0,"Quintino");
+            m = new Moto("HONDA","Tsunami","Rosso",1000,120,new DateTime(), false,false,0,"Quintino",15000);
             BindingListVeicoli.Add(m);
-            Auto a = new Auto("JEEP", "Compass", "Blue", 2400, 160.10, new DateTime(),false,false,0,8);
+            Auto a = new Auto("JEEP", "Compass", "Blue", 2400, 160.10, new DateTime(),false,false,0,8,30000);
             BindingListVeicoli.Add(a);
         }
         private void NuovoVeicolo_Click(object sender, EventArgs e)

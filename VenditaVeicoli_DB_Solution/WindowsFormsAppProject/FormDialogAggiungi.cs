@@ -53,7 +53,7 @@ namespace WindowsFormsAppProject
 
         private void btnAggiungi_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Aggiungi........");
+            MessageBox.Show("........Aggiunto........");
             cilindrata = Convert.ToInt32(txtCilindrata.Text);
             potenzaKW = Convert.ToInt32(txtPotenzakW.Text);
             if((KMZeroNO.Checked)&&(!KMZeroSI.Checked))
@@ -94,17 +94,16 @@ namespace WindowsFormsAppProject
             if (cmbTipoVeicolo.SelectedItem.ToString()=="Moto")
             {
                 Moto m;
-                m = new Moto(cmbMarca.SelectedItem.ToString(),cmbModello.SelectedItem.ToString(),cmbColore.SelectedItem.ToString(),cilindrata, potenzaKW,Data_Time_Immatricolazione.Value ,usato, kmZero, KmPercorsi,txtMarcaSella.Text);
+                m = new Moto(cmbMarca.SelectedItem.ToString(),cmbModello.SelectedItem.ToString(),cmbColore.SelectedItem.ToString(),cilindrata, potenzaKW,Data_Time_Immatricolazione.Value ,usato, kmZero, KmPercorsi,txtMarcaSella.Text,Convert.ToInt32(numUpDwPrice.Value));
                 bindingListVeicoli.Add(m);
             }
             else
             {
                 nAirBag = Convert.ToInt32(txtN_Airbag.Text);
                 Auto a;
-                a = new Auto(cmbMarca.SelectedItem.ToString(),cmbModello.SelectedItem.ToString(),cmbColore.SelectedItem.ToString(), cilindrata,potenzaKW, Data_Time_Immatricolazione.Value, usato, kmZero,KmPercorsi,nAirBag);
+                a = new Auto(cmbMarca.SelectedItem.ToString(),cmbModello.SelectedItem.ToString(),cmbColore.SelectedItem.ToString(), cilindrata,potenzaKW, Data_Time_Immatricolazione.Value, usato, kmZero,KmPercorsi,nAirBag,Convert.ToInt32(numUpDwPrice.Value));
                 bindingListVeicoli.Add(a);
             }
-            
             this.Close();
         }
 
@@ -161,6 +160,11 @@ namespace WindowsFormsAppProject
                 lblKmPercorsi.Visible = true;
                 txtKmPercorsi.Visible = true;
             }
+        }
+
+        private void Prezzo_SelectedItemChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

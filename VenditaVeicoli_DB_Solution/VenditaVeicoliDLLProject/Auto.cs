@@ -20,12 +20,13 @@ namespace VenditaVeicoliDLLProject
             new DateTime(),
             false,
             false,
-            0)
+            0,
+            30000)
         {
             numAirBag = 6;
         }
 
-        public Auto(string marca, string modello, string colore, int cilindarata, double potenzaKw, DateTime immatricolazione, bool isUsato, bool isKmZero, int kmPercorsi,int numAirBag) : base(
+        public Auto(string marca, string modello, string colore, int cilindarata, double potenzaKw, DateTime immatricolazione, bool isUsato, bool isKmZero, int kmPercorsi,int numAirBag,int prezzo) : base(
             marca,
             modello,
             colore,
@@ -34,7 +35,8 @@ namespace VenditaVeicoliDLLProject
             immatricolazione,
             isUsato,
             isKmZero,
-            kmPercorsi)
+            kmPercorsi,
+            prezzo)
         {
             this.NumAirBag = numAirBag;
         }

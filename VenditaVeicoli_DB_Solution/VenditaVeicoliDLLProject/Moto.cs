@@ -17,12 +17,13 @@ namespace VenditaVeicoliDLLProject
             new DateTime(),
             false,
             false,
-            0)
+            0,
+            15000)
         {
             this.MarcaSella = "Cavallino";
         }
 
-        public Moto(string marca, string modello, string colore, int cilindarata, double potenzaKw, DateTime immatricolazione, bool isUsato, bool isKmZero, int kmPercorsi,string marcaSella) : base(
+        public Moto(string marca, string modello, string colore, int cilindarata, double potenzaKw, DateTime immatricolazione, bool isUsato, bool isKmZero, int kmPercorsi,string marcaSella,int prezzo) : base(
            marca,
            modello,
            colore,
@@ -31,7 +32,8 @@ namespace VenditaVeicoliDLLProject
            immatricolazione,
            isUsato,
            isKmZero,
-           kmPercorsi)
+           kmPercorsi,
+           prezzo)
         {
             this.MarcaSella = marcaSella;
         }

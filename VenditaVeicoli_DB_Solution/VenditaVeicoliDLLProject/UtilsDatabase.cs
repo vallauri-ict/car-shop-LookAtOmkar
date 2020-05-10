@@ -60,7 +60,7 @@ namespace VenditaVeicoliDLLProject
             }
         }
 
-        public static void AggiungiVeicolo(string Veicolo)
+        public static void AggiungiVeicolo(Veicolo v)
         {
             try
             {
@@ -71,17 +71,32 @@ namespace VenditaVeicoliDLLProject
                     OleDbCommand cmd = new OleDbCommand();
                     cmd.Connection = connection;
                     ///Comandi di eseguzione SQL
-                    if(Veicolo.ToUpper() =="AUTO")
+                    ///Inserisco tutti i dettagli dell'auto
+                    //////inserisco tutti i dettagli del moto
+                    cmd.CommandText = @"INSERT INTO Veicoli(MARCA,MODELLO,COLORE,CILINDRATA,POTENZAKW,IMMATRICOLAZIONE,ISUSATO,ISKMZERO,KM_PERCORSI,NUMAIRBAG,MARCASELLA,PREZZO)
+                                        VALUES(@MARCA,@MODELLO,@COLORE,@CILINDRATA,@POTENZAKW,@IMMATRICOLAZIONE,@ISUSATO,@ISKMZERO,@KM_PERCORSI,@NUMAIRBAG,@MARCASELLA,@PREZZO)";
+                    cmd.Parameters.Add("@MARCA",OleDbType.VarChar,255).Value=v.Marca;
+                    cmd.Parameters.Add("@MODELLO",OleDbType.VarChar,255).Value=v.Modello;
+                    cmd.Parameters.Add("@COLORE", OleDbType.VarChar, 255).Value = v.Colore;
+                    cmd.Parameters.Add("@POTENZAKW",OleDbType.Integer).Value=v.PotenzaKw;
+                    cmd.Parameters.Add("@IMMATRICOLAZIONE", OleDbType.Date).Value = v.Immatricolazione;
+                    cmd.Parameters.Add("@ISUSATO",OleDbType.Boolean).Value=v.IsUsato;
+                    cmd.Parameters.Add("@ISKMZERO", OleDbType.Boolean).Value = v.IsKmZero;
+                    cmd.Parameters.Add("@KM_PERCORSI", OleDbType.Integer).Value = v.KmPercorsi1;
+                    if(v is Auto) /// Devo anche mettere i parametri che hanno diversamente sia l'auto che la moto.
                     {
-                        ///Inserisco tutti i dettagli dell'auto, tenendo conto la classe Auto.cs
-                        //cmd.CommandText = @"INSERT INTO Veicoli(ID,MARCA,MODELLO,COLORE,CILINDRATA,POTENZAKW,IMMATRICOLAZIONE) VALUES()";
+                        cmd.Parameters.Add("@NUMAIRBAG",OleDbType.Integer).Value=(v as Auto).NumAirBag;
+                        cmd.Parameters.Add("@MARCASELLA",OleDbType.VarChar,255).Value= " ";
                     }
-                    else if(Veicolo.ToUpper() =="MOTO")
+                    else if(v is Moto) //anche se è ovvio(se non è auto, di sicuro sarà una moto), lo scrivo comunque, per sicurezza
                     {
-                        ///inserisco tutti i dettagli del moto, tenendo conto la classe Moto.cs
+                        cmd.Parameters.Add("@NUMAIRBAG", OleDbType.Integer).Value = null;
+                        cmd.Parameters.Add("@MARCASELLA", OleDbType.VarChar, 255).Value = (v as Moto).MarcaSella;
                     }
 
-                    
+
+                    cmd.Prepare();
+                    cmd.ExecuteNonQuery();   
                 }
 
             }
@@ -90,6 +105,8 @@ namespace VenditaVeicoliDLLProject
                 throw new Exception("Connessione interrotta");
             }
         }
+
+
 
         public static void CreaTabella()
         {
@@ -110,6 +127,12 @@ namespace VenditaVeicoliDLLProject
                                      CILINDRATA INT NOT NULL,
                                      POTENZAKW DOUBLE NOT NULL,
                                      IMMATRICOLAZIONE DATATIME NOT NULL,
+                                     ISUSATO CHECK (ISUSATO ==true)NOT NULL,
+                                     ISKMZERO CHECK (ISKMZERO == true )BIT NOT NULL,
+                                     KM_PERCORSI INT ,
+                                     NUMAIRBAG INT,
+                                     MARCASELLA VARCHAR(255) NOT NULL,
+                                     PREZZO INT NOT NULL,
                                      )";
                     cmd.ExecuteNonQuery();
                 }
