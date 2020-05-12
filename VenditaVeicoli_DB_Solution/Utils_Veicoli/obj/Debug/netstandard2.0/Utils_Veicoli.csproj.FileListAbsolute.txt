@@ -1,0 +1,5 @@
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\Utils_Veicoli\bin\Debug\netstandard2.0\Utils_Veicoli.deps.json
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\Utils_Veicoli\bin\Debug\netstandard2.0\Utils_Veicoli.dll
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\Utils_Veicoli\obj\Debug\netstandard2.0\Utils_Veicoli.csprojAssemblyReference.cache
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\Utils_Veicoli\obj\Debug\netstandard2.0\Utils_Veicoli.AssemblyInfoInputs.cache
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\Utils_Veicoli\obj\Debug\netstandard2.0\Utils_Veicoli.AssemblyInfo.cs

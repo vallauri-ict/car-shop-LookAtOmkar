@@ -51,3 +51,5 @@ C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaV
 C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\ConsoleAppProject\bin\Debug\netcoreapp3.0\runtimes\unix\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\ConsoleAppProject\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp2.1\System.Security.Principal.Windows.dll
 C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\ConsoleAppProject\bin\Debug\netcoreapp3.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\ConsoleAppProject\bin\Debug\netcoreapp3.0\DocumentFormat.OpenXml.dll
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\ConsoleAppProject\bin\Debug\netcoreapp3.0\System.IO.Packaging.dll

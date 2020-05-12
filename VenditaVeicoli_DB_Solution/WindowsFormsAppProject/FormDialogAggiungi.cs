@@ -7,6 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;
+using DocumentFormat.OpenXml.Spreadsheet;
 using VenditaVeicoliDLLProject;
 
 namespace WindowsFormsAppProject
@@ -37,7 +41,7 @@ namespace WindowsFormsAppProject
         {
             InitializeComponent();
             this.bindingListVeicoli = bindingListVeicoli;
-            formMain.listBoxVeicoli.DataSource = bindingListVeicoli;
+            formMain.dgvVeicoli.DataSource = bindingListVeicoli;
             this.formMain = formMain;
         }
 

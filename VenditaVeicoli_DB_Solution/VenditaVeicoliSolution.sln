@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppProject", "Consol
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsAppProject", "WindowsFormsAppProject\WindowsFormsAppProject.csproj", "{62E0D198-5AF4-4A21-8A7E-ABD6C41055C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilsVeicoliDLLProject", "Utils_Veicoli\UtilsVeicoliDLLProject.csproj", "{1C3530CA-65D4-4CD4-8F20-5765A7570DF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{62E0D198-5AF4-4A21-8A7E-ABD6C41055C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62E0D198-5AF4-4A21-8A7E-ABD6C41055C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62E0D198-5AF4-4A21-8A7E-ABD6C41055C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C3530CA-65D4-4CD4-8F20-5765A7570DF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C3530CA-65D4-4CD4-8F20-5765A7570DF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C3530CA-65D4-4CD4-8F20-5765A7570DF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C3530CA-65D4-4CD4-8F20-5765A7570DF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

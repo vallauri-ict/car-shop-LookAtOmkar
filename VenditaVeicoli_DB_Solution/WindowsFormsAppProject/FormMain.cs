@@ -8,7 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using VenditaVeicoliDLLProject;
+using UtilsVeicoliDLLProject;
 using System.IO;
+using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml.Wordprocessing;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace WindowsFormsAppProject
 {
@@ -19,7 +24,10 @@ namespace WindowsFormsAppProject
         {
             InitializeComponent();
             BindingListVeicoli = new SerializableBindingList<Veicolo>();
-            listBoxVeicoli.DataSource = BindingListVeicoli;
+            dgvVeicoli.AutoResizeColumns();
+            dgvVeicoli.AutoResizeRows();
+            dgvVeicoli.ClearSelection();
+            dgvVeicoli.RowHeadersVisible = false;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -29,13 +37,17 @@ namespace WindowsFormsAppProject
 
         private void caricaDatiDiTest()
         {
-            UtilsDatabase.CreaTabella();
+            //UtilsDatabase.CreaTabella();
             Moto m = new Moto();
             BindingListVeicoli.Add(m);
-            m = new Moto("HONDA", "Tsunami", "Rosso", 1000, 120, new DateTime(), false, false, 0, "Quintino", 15000);
+            m = new Moto("HONDA", "Tsunami", "Rosso", 1000, 120, DateTime.Now, false, false, 0, "Quintino", 15000);
             BindingListVeicoli.Add(m);
-            Auto a = new Auto("JEEP", "Compass", "Blue", 2400, 160.10, new DateTime(), false, false, 0, 8, 30000);
+            //UtilsDatabase.AggiungiVeicolo(m);
+            Auto a = new Auto("JEEP", "Compass", "Blue", 2400, 160.10, DateTime.Now, false, false, 0, 8, 30000);
             BindingListVeicoli.Add(a);
+            //UtilsDatabase.AggiungiVeicolo(a);
+            dgvVeicoli.DataSource = BindingListVeicoli;
+            
         }
         private void NuovoVeicolo_Click(object sender, EventArgs e)
         {
@@ -53,7 +65,7 @@ namespace WindowsFormsAppProject
                 StreamReader sr = new StreamReader(file.FileName);
                 while (sr.Peek() > -1)
                 {
-                    listBoxVeicoli.Items.Add(sr.ReadLine());
+                    ///
                 }
                 sr.Close();
             }
@@ -73,10 +85,12 @@ namespace WindowsFormsAppProject
 
         private void StampaVeicolo_Click(object sender, EventArgs e)
         {
-            ///JSON//
+            /// SALVATAGGIO LISTA IN JSON//
             string json = @".\www\index.json";
             Utils.SerializeToJson(BindingListVeicoli, json);
             MessageBox.Show("File salvato in json");
+
+            //--------------------STAMPA-----------------------
         }
         private string immagine(string marca)
         {
@@ -172,6 +186,40 @@ namespace WindowsFormsAppProject
             File.WriteAllText(homepagePath, html);
             System.Diagnostics.Process.Start(homepagePath);
 
+        }
+
+        private void ExportWord_Click(object sender, EventArgs e)
+        {
+            using(WordprocessingDocument doc = WordprocessingDocument.Create("Volantino_Veicoli.docx",WordprocessingDocumentType.Document))
+            {
+                ///CREATION AND STRUCTURE OF WORD DOC
+                MainDocumentPart mainPart = doc.AddMainDocumentPart();
+                mainPart.Document = new Document();
+                Body docBody = new Body();
+                mainPart.Document.AppendChild(docBody);
+                ///Description of doC
+                ///TITLE
+                Paragraph Header_p = UtilsWord.CreateParagraphWithStyle("Heading",JustificationValues.Center);
+                UtilsWord.AddTextToParagraph(Header_p,"VOLANTINO VEICOLI NUOVI E USATI ");
+                docBody.AppendChild(Header_p);
+
+                ///SUBTITLE
+                Paragraph SubHeader_p = UtilsWord.CreateParagraphWithStyle("Content",JustificationValues.Center);
+                UtilsWord.AddTextToParagraph(SubHeader_p,"Qui troverete i dati di tutti i veicoli nuovi e usati che abbiamo in disposizione");
+                docBody.AppendChild(SubHeader_p);
+                
+                ///CONTENT
+
+
+            }
+        }
+
+        private void ExporExcel_Click(object sender, EventArgs e)
+        {
+            UtilsExcel.CreateExcelFile<Veicolo>(BindingListVeicoli.ToList(),"Cars_Details.xlsx"); ///HO CONVERTITO LA SERIALIZEBINDINGLIST IN LIST, DATO CHE NELLA LIBRERIA DI EXCEL, RICHIEDEVA COME PARAMETRO UNA LIST.
+            MessageBox.Show("I Dati sono stati esportati in File Excel correttamente");
+            System.Diagnostics.Process.Start("Cars_Details.xlsx");
+                
         }
     }
 }

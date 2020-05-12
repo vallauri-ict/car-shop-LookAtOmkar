@@ -1,0 +1,82 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Rathore\\Desktop\\SCUOLA\\Scuola-4B INF\\INFORMATICA\\DATABASE--SQL\\VenditaVeicoli_DB_Solution\\Utils_Veicoli\\Utils_Veicoli.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Rathore\\Desktop\\SCUOLA\\Scuola-4B INF\\INFORMATICA\\DATABASE--SQL\\VenditaVeicoli_DB_Solution\\Utils_Veicoli\\Utils_Veicoli.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Rathore\\Desktop\\SCUOLA\\Scuola-4B INF\\INFORMATICA\\DATABASE--SQL\\VenditaVeicoli_DB_Solution\\Utils_Veicoli\\Utils_Veicoli.csproj",
+        "projectName": "Utils_Veicoli",
+        "projectPath": "C:\\Users\\Rathore\\Desktop\\SCUOLA\\Scuola-4B INF\\INFORMATICA\\DATABASE--SQL\\VenditaVeicoli_DB_Solution\\Utils_Veicoli\\Utils_Veicoli.csproj",
+        "packagesPath": "C:\\Users\\Rathore\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Rathore\\Desktop\\SCUOLA\\Scuola-4B INF\\INFORMATICA\\DATABASE--SQL\\VenditaVeicoli_DB_Solution\\Utils_Veicoli\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Rathore\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "DocumentFormat.OpenXml": {
+              "target": "Package",
+              "version": "[2.10.1, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            },
+            "System.Data.OleDb": {
+              "target": "Package",
+              "version": "[4.7.1, )"
+            },
+            "System.IO.FileSystem": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
