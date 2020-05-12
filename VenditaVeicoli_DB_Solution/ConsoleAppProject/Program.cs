@@ -1,13 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using VenditaVeicoliDLLProject;
 using System.Data.OleDb;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.IO;
 
 namespace ConsoleAppProject
 {
     public class Program
     {
-       
-        static void Main(string[] args)
+        public static string DbPath = $"{Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName}\\Veicoli.accdb";
+
+        public static string connstr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + DbPath;
+        public static void Main(string[] args)
         {
             char scelta;
 
@@ -20,7 +31,7 @@ namespace ConsoleAppProject
 
 
             SerializableBindingList<Veicolo> BindingListVeicoli = new SerializableBindingList<Veicolo>();
-            
+
             do
             {
                 menu();
@@ -31,7 +42,7 @@ namespace ConsoleAppProject
                     case '1':
                         {
                             UtilsDatabase.CreaTabella();
-                            Console.WriteLine("Tabella Creata");
+                            Console.WriteLine("Tabella Creata Correttamente");
                             Console.ReadKey();
                             break;
                         }
@@ -41,12 +52,12 @@ namespace ConsoleAppProject
                             Veicolo v;
                             Console.WriteLine("AUTO(A) O MOTO(M) ?");
                             char Veicolo_scelto = Console.ReadKey().KeyChar;
-                            if((Veicolo_scelto =='A')||(Veicolo_scelto== 'a'))
+                            if ((Veicolo_scelto == 'A') || (Veicolo_scelto == 'a'))
                                 v = new Auto();
                             else
                                 v = new Moto();
                             Console.WriteLine("MARCA [DUCATI|HONDA|JEEP|MERCEDES] :");
-                            v.Marca  =  Console.ReadLine().ToUpper(); //Per evitare errori o confusioni, metto tutti gli input dati in maiuscolo
+                            v.Marca = Console.ReadLine().ToUpper(); //Per evitare errori o confusioni, metto tutti gli input dati in maiuscolo
                             Console.WriteLine("MODELLO [MONSTER|DIAVEL|CIVIC|JAZZ|WRANGLER|COMPASS|CLASSE_A|G_WAGON] : ");
                             v.Modello = Console.ReadLine().ToUpper();
                             Console.WriteLine("COLORE :");
@@ -78,12 +89,12 @@ namespace ConsoleAppProject
                                 Console.WriteLine("KM PERCORSI :");
                                 v.KmPercorsi1 = Convert.ToInt32(Console.ReadLine().ToUpper());
                             }
-                            if(v is Auto)
+                            if (v is Auto)
                             {
                                 Console.WriteLine("NUMERO DI AIRBAG: ");
                                 (v as Auto).NumAirBag = Convert.ToInt32(Console.ReadLine().ToUpper());
                             }
-                            else if(v is Moto)
+                            else if (v is Moto)
                             {
                                 Console.WriteLine("MARCA SELLA: ");
                                 (v as Moto).MarcaSella = Console.ReadLine().ToUpper();
@@ -102,26 +113,28 @@ namespace ConsoleAppProject
                     case '3':
                         {
                             ///Veicolo Eliminato in Database
-                            UtilsDatabase.EliminaVeicolo();
-                            Console.WriteLine("Veicolo Eliminato");
+                            Console.WriteLine("Inserisci ID del Veicolo da eliminare: ");
+                            int Key = Convert.ToInt32(Console.ReadLine());
+                            UtilsDatabase.EliminaVeicolo(Key);
+                            Console.WriteLine("Veicolo Eliminato Correttamente");
                             Console.ReadKey();
                             break;
                         }
                     case '4':
                         {
                             //Esclusivamente usato per console
-                            UtilsDatabase.VisualizzaListaVeicoli();
+                            UtilsDatabase.VisualizzaConsoleListaVeicoli();
                             Console.ReadKey();
                             break;
                         }
                 }
-            } while ((scelta !='X')||(scelta != 'x'));
-           
+            } while ((scelta != 'X') || (scelta != 'x'));
+
         }
 
         private static void menu()
         {
-            Console.WriteLine("**** SALONE VENDITA VEICOLI NUOVI E USATI ****");
+            Console.WriteLine("******** \t SALONE VENDITA VEICOLI NUOVI E USATI\t ********");
             Console.WriteLine("1 - CREA TABELLA");
             Console.WriteLine("2 - AGGIUNGI VEICOLO");
             Console.WriteLine("3 - ELIMINA VEICOLO");

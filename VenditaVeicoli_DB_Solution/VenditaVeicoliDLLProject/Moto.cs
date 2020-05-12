@@ -3,12 +3,12 @@
 namespace VenditaVeicoliDLLProject
 {
     [Serializable()]
-    public class Moto:Veicolo //eredita dalla classe veicolo
+    public class Moto : Veicolo //eredita dalla classe veicolo
     {
 
         private string marcaSella;
 
-        public Moto():base(  ///base=classe veicolo 
+        public Moto() : base(  ///base=classe veicolo 
             "DUCATI",
             "Squalo",
             "Nero",
@@ -23,7 +23,7 @@ namespace VenditaVeicoliDLLProject
             this.MarcaSella = "Cavallino";
         }
 
-        public Moto(string marca, string modello, string colore, int cilindarata, double potenzaKw, DateTime immatricolazione, bool isUsato, bool isKmZero, int kmPercorsi,string marcaSella,int prezzo) : base(
+        public Moto(string marca, string modello, string colore, int cilindarata, double potenzaKw, DateTime immatricolazione, bool isUsato, bool isKmZero, int kmPercorsi, string marcaSella, int prezzo) : base(
            marca,
            modello,
            colore,

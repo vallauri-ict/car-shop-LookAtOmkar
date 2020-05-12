@@ -26,7 +26,7 @@ namespace VenditaVeicoliDLLProject
             numAirBag = 6;
         }
 
-        public Auto(string marca, string modello, string colore, int cilindarata, double potenzaKw, DateTime immatricolazione, bool isUsato, bool isKmZero, int kmPercorsi,int numAirBag,int prezzo) : base(
+        public Auto(string marca, string modello, string colore, int cilindarata, double potenzaKw, DateTime immatricolazione, bool isUsato, bool isKmZero, int kmPercorsi, int numAirBag, int prezzo) : base(
             marca,
             modello,
             colore,

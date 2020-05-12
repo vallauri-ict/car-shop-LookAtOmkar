@@ -61,10 +61,10 @@ namespace VenditaVeicoliDLLProject
             File.WriteAllText(pathName, json);
         }
 
-        public static void CreateHTML<T>(IEnumerable<T> objectList,string pathname,string skeletonPathName = @".\www\index-Skeleton.html")
+        public static void CreateHTML<T>(IEnumerable<T> objectList, string pathname, string skeletonPathName = @".\www\index-Skeleton.html")
         {
             string html = File.ReadAllText(skeletonPathName);
-            html = html.Replace("{{head-title}}","AUTOVALLAURI");
+            html = html.Replace("{{head-title}}", "AUTOVALLAURI");
             html = html.Replace("{{body-title}}", "SALONE VALLAURI-VEICOLI NUOVI E USATI");
             html = html.Replace("{{body-subtitle}}", "le migliori occasioni al miglior prezzo");
             html = html.Replace("{{main-content}}", "...(qui ci sarà le liste dei veicoli in vendite)...");

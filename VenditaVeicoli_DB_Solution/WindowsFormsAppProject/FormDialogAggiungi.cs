@@ -20,10 +20,10 @@ namespace WindowsFormsAppProject
         public int nAirBag;
         public bool usato;
         public bool kmZero;
-        public string[] Auto = { "MERCEDES","JEEP","AUDI"};
-        public string[] Moto = {"DUCATI","HONDA","BMW" };
-        public string[] ModelloAuto = {"Glx","Classe S","Classe A" };
-        public string[] ModelloMoto = {"AA","BB","CC" };
+        public string[] Auto = { "MERCEDES", "JEEP", "AUDI" };
+        public string[] Moto = { "DUCATI", "HONDA", "BMW" };
+        public string[] ModelloAuto = { "Glx", "Classe S", "Classe A" };
+        public string[] ModelloMoto = { "AA", "BB", "CC" };
         private FormMain formMain;
 
         public FormDialogAggiungi()
@@ -56,24 +56,24 @@ namespace WindowsFormsAppProject
             MessageBox.Show("........Aggiunto........");
             cilindrata = Convert.ToInt32(txtCilindrata.Text);
             potenzaKW = Convert.ToInt32(txtPotenzakW.Text);
-            if((KMZeroNO.Checked)&&(!KMZeroSI.Checked))
+            if ((KMZeroNO.Checked) && (!KMZeroSI.Checked))
             {
                 kmZero = false;
                 KmPercorsi = Convert.ToInt32(txtKmPercorsi.Text);
             }
-            else 
+            else
             {
                 if ((!KMZeroNO.Checked) && (KMZeroSI.Checked))
                 {
                     kmZero = true;
                     KmPercorsi = 0;
                 }
-                   
+
                 else
                 {
                     MessageBox.Show("Devi specificare se il veicolo è a km zero o no");
                 }
-                    
+
             }
             if ((UsatoNO.Checked) && (!UsatoSI.Checked))
             {
@@ -91,17 +91,17 @@ namespace WindowsFormsAppProject
                     MessageBox.Show("Devi specificare se il veicolo è usato o no");
             }
 
-            if (cmbTipoVeicolo.SelectedItem.ToString()=="Moto")
+            if (cmbTipoVeicolo.SelectedItem.ToString() == "Moto")
             {
                 Moto m;
-                m = new Moto(cmbMarca.SelectedItem.ToString(),cmbModello.SelectedItem.ToString(),cmbColore.SelectedItem.ToString(),cilindrata, potenzaKW,Data_Time_Immatricolazione.Value ,usato, kmZero, KmPercorsi,txtMarcaSella.Text,Convert.ToInt32(numUpDwPrice.Value));
+                m = new Moto(cmbMarca.SelectedItem.ToString(), cmbModello.SelectedItem.ToString(), cmbColore.SelectedItem.ToString(), cilindrata, potenzaKW, Data_Time_Immatricolazione.Value, usato, kmZero, KmPercorsi, txtMarcaSella.Text, Convert.ToInt32(numUpDwPrice.Value));
                 bindingListVeicoli.Add(m);
             }
             else
             {
                 nAirBag = Convert.ToInt32(txtN_Airbag.Text);
                 Auto a;
-                a = new Auto(cmbMarca.SelectedItem.ToString(),cmbModello.SelectedItem.ToString(),cmbColore.SelectedItem.ToString(), cilindrata,potenzaKW, Data_Time_Immatricolazione.Value, usato, kmZero,KmPercorsi,nAirBag,Convert.ToInt32(numUpDwPrice.Value));
+                a = new Auto(cmbMarca.SelectedItem.ToString(), cmbModello.SelectedItem.ToString(), cmbColore.SelectedItem.ToString(), cilindrata, potenzaKW, Data_Time_Immatricolazione.Value, usato, kmZero, KmPercorsi, nAirBag, Convert.ToInt32(numUpDwPrice.Value));
                 bindingListVeicoli.Add(a);
             }
             this.Close();
@@ -114,8 +114,8 @@ namespace WindowsFormsAppProject
 
         private void cmbTipoVeicolo_SelectedIndexChanged(object sender, EventArgs e)
         {
-          
-          
+
+
             if (cmbTipoVeicolo.Text == "AUTO")
             {
                 cmbMarca.Items.Clear();
@@ -130,7 +130,7 @@ namespace WindowsFormsAppProject
                 lblAirbag.Visible = true;
                 txtN_Airbag.Visible = true;
             }
-            else if(cmbTipoVeicolo.Text=="MOTO")
+            else if (cmbTipoVeicolo.Text == "MOTO")
             {
                 cmbMarca.Items.Clear();
                 cmbModello.Items.Clear();
@@ -150,7 +150,7 @@ namespace WindowsFormsAppProject
 
         private void KMZeroSI_CheckedChanged(object sender, EventArgs e)
         {
-            if((KMZeroSI.Checked)&&(!KMZeroNO.Checked))
+            if ((KMZeroSI.Checked) && (!KMZeroNO.Checked))
             {
                 lblKmPercorsi.Visible = false;
                 txtKmPercorsi.Visible = false;

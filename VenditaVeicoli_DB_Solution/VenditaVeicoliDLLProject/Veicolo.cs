@@ -22,10 +22,10 @@ namespace VenditaVeicoliDLLProject
         private bool isKmZero;
         private int KmPercorsi;
         private int prezzo;
-        
+
         #endregion
 
-        public Veicolo(string marca, string modello, string colore, int cilindarata, double potenzaKw, DateTime immatricolazione, bool isUsato, bool isKmZero, int kmPercorsi,int prezzo)
+        public Veicolo(string marca, string modello, string colore, int cilindarata, double potenzaKw, DateTime immatricolazione, bool isUsato, bool isKmZero, int kmPercorsi, int prezzo)
         {
             this.Marca = marca;
             this.Modello = modello;
