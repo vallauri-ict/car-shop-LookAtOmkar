@@ -10,7 +10,10 @@
 
 **2. There are 2 DLL Project where there are all of the functions to manipulate the project, and classes specified.**
 
-![Cattura](https://user-images.githubusercontent.com/61886825/82003554-f3d3eb00-9660-11ea-9a0b-73511040beee.PNG)
+** 1^DLL:**
+
+
+** 2^DLL**
 
 
 **3. Windows Forms Project.** 
