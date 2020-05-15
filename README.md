@@ -17,6 +17,7 @@
 
 ** 2^DLL**
 
+![Cattura_2](https://user-images.githubusercontent.com/61886825/82003807-942a0f80-9661-11ea-9f63-b55caa88fc13.PNG)
 
 
 **3. Windows Forms Project.** 
