@@ -54,6 +54,7 @@ namespace WindowsFormsAppProject
         {
             Moto m = new Moto();
             BindingListVeicoli.Add(m);
+            //UtilsDatabase.AggiungiVeicolo(m);// problemi di provider 
             m = new Moto("HONDA", "Tsunami", "Rosso", 1000, 120, DateTime.Now, false, false, 0, "Quintino", 15000);
             BindingListVeicoli.Add(m);
             //UtilsDatabase.AggiungiVeicolo(m); Problemi di provider.
@@ -104,6 +105,7 @@ namespace WindowsFormsAppProject
             string json = @".\www\index.json";
             Utils.SerializeToJson(BindingListVeicoli, json);
             MessageBox.Show("File salvato correttamente");
+            ScriviPage(); /// carico i dati sulla pagina html
             ///DEVO INSERIRE UNA FUNZIONE CHE MI PERMETTA DI SALVARE IL DATABASE DI VEICOLI
             
             //UtilsDatabase.AggiornaDataBase("Veicoli"); // problemi con il provider
@@ -176,33 +178,7 @@ namespace WindowsFormsAppProject
                 stringToPrint = stringToPrint;
         }
 
-
-        
-
-        private string ScriviHTML(string html, int i,int vehicles)
-        {
-            string s = "";
-            s += $"<div class='Body-content' id='{i}'><div class='{html}'></div>";
-            s += "<div class='Dettagli'><p> Marca:" +
-                 BindingListVeicoli[i].Marca + "\n  MODELLO: "
-                 + BindingListVeicoli[i].Modello + "\n  POTENZA KW: " +
-                 BindingListVeicoli[i].PotenzaKw + "\n  KM PERCORSI:" +
-                 BindingListVeicoli[i].KmPercorsi1 + "\n  CILINDRATA: " +
-                 BindingListVeicoli[i].Cilindarata + "\n  COLORE: " +
-                 BindingListVeicoli[i].Colore;
-            if (BindingListVeicoli[i].IsUsato == false)
-                s += "<br>USATO: NO";
-            else
-                s += "<br>USATO: SI";
-            if (BindingListVeicoli[i].IsKmZero == false)
-                s += "<br>KM ZERO: NO";
-            else
-                s += "<br>KM ZERO: SI</p>";
-            s += "</div></div>";
-            return s;
-        }
-
-        private void btnWeb_Click(object sender, EventArgs e)
+        private string ScriviPage()
         {
             string homepagePath = @".\www\index.html";
             //Utils.CreateHTML(BindingListVeicoli, homepagePath);
@@ -214,35 +190,35 @@ namespace WindowsFormsAppProject
             html = html.Replace("{{body-title}}", "SALONE VALLAURI-VEICOLI NUOVI E USATI");
             html = html.Replace("{{body-subtitle}}", "le migliori occasioni al miglior prezzo");
             ///---------------Dati----------------
-            int nDucati=0;
-            int nJeep=0;
-            int nMercedes=0;
-            int nHonda=0;
+            int nDucati = 0;
+            int nJeep = 0;
+            int nMercedes = 0;
+            int nHonda = 0;
             for (int i = 0; i < BindingListVeicoli.Count; i++)
             {
                 switch (BindingListVeicoli[i].Marca)
                 {
                     case "DUCATI":
                         {
-                            s += ScriviHTML("DUCATI", nDucati,i);
+                            s += AggiungiDivHTML("DUCATI", nDucati, i);
                             nDucati++;
                             break;
                         }
                     case "JEEP":
                         {
-                            s += ScriviHTML("JEEP", nJeep,i);
+                            s += AggiungiDivHTML("JEEP", nJeep, i);
                             nJeep++;
                             break;
                         }
                     case "MERCEDES":
                         {
-                            s += ScriviHTML("MERCEDES", nMercedes,i);
+                            s += AggiungiDivHTML("MERCEDES", nMercedes, i);
                             nMercedes++;
                             break;
                         }
                     case "HONDA":
                         {
-                            s += ScriviHTML("HONDA", nHonda,i);
+                            s += AggiungiDivHTML("HONDA", nHonda, i);
                             nHonda++;
                             break;
                         }
@@ -250,6 +226,36 @@ namespace WindowsFormsAppProject
             }
             html = html.Replace("{{main-content}}", s);
             File.WriteAllText(homepagePath, html);
+            return homepagePath;
+        }
+        
+
+        private string AggiungiDivHTML(string html, int i,int vehicles)
+        {
+            string s = "";
+            s += $"<div class='Body-content' id='{i}'><div class='{html}'></div>";
+            s += "<div class='Dettagli'><p> Marca:" +
+                 BindingListVeicoli[vehicles].Marca + "<br>  MODELLO: "
+                 + BindingListVeicoli[vehicles].Modello + "<br>  POTENZA KW: " +
+                 BindingListVeicoli[vehicles].PotenzaKw + "<br> KM PERCORSI:" +
+                 BindingListVeicoli[vehicles].KmPercorsi1 + "<br> CILINDRATA: " +
+                 BindingListVeicoli[vehicles].Cilindarata + "<br>  COLORE: " +
+                 BindingListVeicoli[vehicles].Colore;
+            if (BindingListVeicoli[vehicles].IsUsato == false)
+                s += "<br>USATO: NO";
+            else
+                s += "<br>USATO: SI";
+            if (BindingListVeicoli[vehicles].IsKmZero == false)
+                s += "<br>KM ZERO: NO";
+            else
+                s += "<br>KM ZERO: SI</p>";
+            s += "</div></div>";
+            return s;
+        }
+
+        private void btnWeb_Click(object sender, EventArgs e)
+        {
+            string homepagePath = ScriviPage();
             System.Diagnostics.Process.Start(homepagePath);
 
         }

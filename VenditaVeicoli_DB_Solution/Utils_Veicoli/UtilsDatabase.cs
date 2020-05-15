@@ -109,7 +109,7 @@ namespace UtilsVeicoliDLLProject
             }
         }
 
-        public static void AggiornaDataBase(Veicolo v,string tablename)
+        public static void AggiornaDataBase(string tablename,string id,string option,string data)
         {
             try
             {
@@ -119,8 +119,24 @@ namespace UtilsVeicoliDLLProject
                     OleDbCommand cmd = new OleDbCommand();
                     cmd.Connection = connection;
                     cmd.CommandText = $@"UPDATE {tablename} SET MARCA = @MARCA, MODELLO = @MODELLO, COLORE = @COLORE, CILINDRATA = @CILINDRATA, POTENZAKW = @POTENZAKW,
-                                        IMMATRICOLAZIONE = @IMMATRICOLAZIONE, USATO= @USATO, KMZERO=@KMZERO, NUMAIRBAG = @NUMAIRBAG, MARCASELLA = @MARCASELLA, PREZZO = @PREZZO";
-                    AddParametres(v,cmd);
+                                        IMMATRICOLAZIONE = @IMMATRICOLAZIONE, USATO= @USATO, KMZERO=@KMZERO, KM_PERCORSI=@KM_PERCORSI ,NUMAIRBAG = @NUMAIRBAG, MARCASELLA = @MARCASELLA, PREZZO = @PREZZO WHERE ID={id}";
+                    if((option == "MARCA")|| (option == "MODELLO")|| (option == "COLORE")|| (option == "MARCASELLA"))
+                    {
+                        cmd.Parameters.Add($"{option}",OleDbType.VarChar,255).Value=data;
+                    }
+                    else if((option == "CILINDRATA" )|| (option == "KM_PERCORSI") || (option == "NUMAIRBAG") || (option == "PREZZO"))
+                    {
+                        cmd.Parameters.Add($"{option}",OleDbType.Integer).Value=data;
+                    }
+                    else if(option == "POTENZAKW")
+                    {
+                        cmd.Parameters.Add($"{option}", OleDbType.Double).Value = data;
+                    }
+                    else if((option == "USATO") ||(option == "KMZERO"))
+                    {
+                        cmd.Parameters.Add($"{option}", OleDbType.Boolean).Value = data;
+                    }
+                    cmd.Prepare();
                     cmd.ExecuteNonQuery();
                 }
             }

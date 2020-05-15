@@ -212,8 +212,8 @@
         private System.Windows.Forms.ToolStripButton ExportWord;
         private System.Windows.Forms.ToolStripButton ExportExcel;
         private System.Drawing.Printing.PrintDocument printDoc;
-        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;
         private System.Windows.Forms.ToolStripButton ToolInfo;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;
     }
 }
 

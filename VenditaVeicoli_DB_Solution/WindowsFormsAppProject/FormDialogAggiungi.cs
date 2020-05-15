@@ -62,7 +62,7 @@ namespace WindowsFormsAppProject
 
         private void btnAggiungi_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("........Aggiunto........");
+            MessageBox.Show("........Aggiunto Veicolo Correttamente........");
             cilindrata = Convert.ToInt32(txtCilindrata.Value);
             potenzaKW = Convert.ToInt32(txtPotenzakW.Value);
             if ((KMZeroNO.Checked) && (!KMZeroSI.Checked))
@@ -80,7 +80,7 @@ namespace WindowsFormsAppProject
 
                 else
                 {
-                    MessageBox.Show("Devi specificare se il veicolo è a km zero o no");
+                    throw new Exception("Devi specificare se il veicolo è a km zero o no");
                 }
 
             }
@@ -97,7 +97,7 @@ namespace WindowsFormsAppProject
                     KmPercorsi = 0;
                 }
                 else
-                    MessageBox.Show("Devi specificare se il veicolo è usato o no");
+                    throw new Exception("Devi specificare se il veicolo è usato o no")
             }
 
             if (cmbTipoVeicolo.SelectedItem.ToString() == "Moto")

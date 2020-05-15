@@ -65,10 +65,25 @@ namespace ConsoleAppProject
                         }
                     case '4':
                         {
-                            ///Update Table
-                            Veicolo v;
-                            v = AddParamtresConsole();
-                            UtilsDatabase.AggiornaDataBase(v,"Veicoli");
+                            ///Update Table with new Datas
+                            string _option;
+                            string Data_Mod;
+                            String Id;
+                            Console.WriteLine("SCRIVI ID DEL VEICOLO:");
+                            Id = Console.ReadLine().ToUpper();
+                            Console.WriteLine("MARCA|MODELLO|COLORE|CILINDRATA|POTENZAKW|USATO|KMZERO|KM_PERCORSI|NUMAIRBAG|MARCASELLA|PREZZO");
+                            Console.WriteLine("SCEGLI OPZIONE: ");
+                            _option = Console.ReadLine().ToUpper();
+                            if ((_option == "USATO") || (_option == "KMZERO"))
+                            {
+                                Console.WriteLine($"SCRIVI IL DATO DI {_option} [SI][NO] : ");
+                            }
+                            else
+                            {
+                                Console.WriteLine($"SCRIVI IL DATO DI {_option} : ");
+                            }
+                            Data_Mod = Console.ReadLine().ToUpper();
+                            UtilsDatabase.AggiornaDataBase("Veicoli",Id,_option,Data_Mod);
                             Console.WriteLine("Database aggiornato correttamente");
                             Console.ReadKey();
                             break;
@@ -76,8 +91,14 @@ namespace ConsoleAppProject
                     case '5':
                         {
                             ///Destroy Table
-                            UtilsDatabase.EliminaDataBase("Veicolo");
-                            Console.WriteLine("Il database è stato eliminato con successo");
+                            string confirm;
+                            Console.WriteLine("Sei sicuro di eliminare database[SI][NO] ?");
+                            confirm = Console.ReadLine().ToUpper();
+                            if(confirm=="SI")
+                            {
+                                UtilsDatabase.EliminaDataBase("Veicolo");
+                                Console.WriteLine("Il database è stato eliminato con successo");
+                            }
                             Console.ReadKey();
                             break;
                         }
@@ -87,6 +108,11 @@ namespace ConsoleAppProject
                             UtilsDatabase.VisualizzaConsoleListaVeicoli();
                             Console.WriteLine("Ecco la lista dei veicoli");
                             Console.ReadKey();
+                            break;
+                        }
+                    case '7':
+                        {
+                            Console.Clear();
                             break;
                         }
                 }
@@ -156,9 +182,10 @@ namespace ConsoleAppProject
             Console.WriteLine("1 - CREA TABELLA");
             Console.WriteLine("2 - AGGIUNGI VEICOLO");
             Console.WriteLine("3 - ELIMINA VEICOLO");
-            Console.WriteLine("4 - AGGIORNA DATABASE");
+            Console.WriteLine("4 - MODIFICA DATABASE");
             Console.WriteLine("5 - ELIMINA DATABASE ");
             Console.WriteLine("6 - LISTA DI VEICOLI");
+            Console.WriteLine("7 - PULISCI");
             Console.WriteLine("X - CHIUDI \n ");
         }
 
