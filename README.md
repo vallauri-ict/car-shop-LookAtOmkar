@@ -4,18 +4,20 @@
 
 ![Cattura](https://user-images.githubusercontent.com/61886825/82003362-70b29500-9660-11ea-9fb9-18fd23db0a6c.PNG)
 
+**Up there is a toolNavigator, and Where there is a blank area, is the place called DataGridView where  Datas are uploaded**
+
 **It Contents:**
 
 **1. Console Project**
 
 **2. There are 2 DLL Project where there are all of the functions to manipulate the project, and classes specified.**
 
-** 1^DLL:**
+**1^DLL:**
 
 ![Cattura_1](https://user-images.githubusercontent.com/61886825/82003763-72308d00-9661-11ea-9622-a8f8882fe8f3.PNG)
 
 
-** 2^DLL**
+**2^DLL**
 
 ![Cattura_2](https://user-images.githubusercontent.com/61886825/82003807-942a0f80-9661-11ea-9f63-b55caa88fc13.PNG)
 
