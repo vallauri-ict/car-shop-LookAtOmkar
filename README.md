@@ -1,14 +1,17 @@
 **CAR-SHOP PROJECT**
 
 **This project is about a leaflet of vehicles.**
-![Cattura](https://user-images.githubusercontent.com/61886825/82003362-70b29500-9660-11ea-9fb9-18fd23db0a6c.PNG)
 
+![Cattura](https://user-images.githubusercontent.com/61886825/82003362-70b29500-9660-11ea-9fb9-18fd23db0a6c.PNG)
 
 **It Contents:**
 
 **1. Console Project**
 
-**2. There are 2 DLL Project where there are all of the functions to manipulate the project, and classes specified like in one DLL, a class for Car, a class for Bike, a class for Vehicle in general, and in other DLL, a class for Database, a class for OpenXml-Word, a class for OpenXml-Excel**
+**2. There are 2 DLL Project where there are all of the functions to manipulate the project, and classes specified.**
+
+![Cattura](https://user-images.githubusercontent.com/61886825/82003554-f3d3eb00-9660-11ea-9a0b-73511040beee.PNG)
+
 
 **3. Windows Forms Project.** 
 
