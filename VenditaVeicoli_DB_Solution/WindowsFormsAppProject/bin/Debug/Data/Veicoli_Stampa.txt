@@ -1,0 +1,7 @@
+*******VEICOLI NUOVI E USATI*******
+
+ID 	| TIPO 	| MARCA 	| MODELLO 	| COLORE 	| CILINDRATA 	| POTENZAKW 	| IMMATRICOLAZIONE 	| USATO 	| KMZERO 	| KM_PERCORSI 	| PREZZO
+__________________________________________________________________________________________________________________________
+Moto: 	DUCATI	Squalo	Nero	1000	75,2	15/05/2020 02:57:00	NO	NO	0	15000	
+Moto: 	HONDA	Tsunami	Rosso	1000	120	15/05/2020 02:57:00	NO	NO	0	15000	
+Auto : 	JEEP	Compass	Blue	2400	160,1	15/05/2020 02:57:00	NO	NO	0	30000	

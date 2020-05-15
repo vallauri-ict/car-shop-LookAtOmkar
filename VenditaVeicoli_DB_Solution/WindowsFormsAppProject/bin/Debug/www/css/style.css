@@ -1,13 +1,18 @@
-﻿body
-{
-    background-color:lightyellow;
+﻿*{
+    margin:0;
+    padding:0;
 }
-
+html{
+    width:100%;
+    height:100%;
+}
 h2, h5 {
     text-align: center;
     font-family: 'Microsoft Sans Serif';
-    color:white;
+    color:gold;
     text-decoration:solid;
+    font-size:24pt;
+    text-shadow:3px 3px 2px brown;
 }
 h5{
     font-size:15pt;
@@ -59,27 +64,21 @@ div{
     width:100%;
     float:left;
     border:none;
-    margin:0 auto;
-    height:1000px;
+    margin-top:3.3em;
+    height:auto;
 }
 body{
     background-image: url("MainContent.jpg");
-    background-repeat:no-repeat;
+    background-repeat:inherit;
     background-size:cover;
+    height:100%;
 }
 .Body-content {
     width: 300px;
     height: 350px;
     margin: 10px;
     margin-left:20px;
-    background-color: transparent;
     background-image: none;
     border: none;
     position: relative;
-}
-footer{
-    width:100%;
-    background-color:#edd23c;
-    font-size:15pt;
-    font-family:'Microsoft Sans Serif';
 }

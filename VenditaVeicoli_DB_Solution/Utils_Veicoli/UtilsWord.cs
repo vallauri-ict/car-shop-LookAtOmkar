@@ -11,6 +11,7 @@ using Color = DocumentFormat.OpenXml.Wordprocessing.Color;
 using A = DocumentFormat.OpenXml.Drawing;
 using DW = DocumentFormat.OpenXml.Drawing.Wordprocessing;
 using PIC = DocumentFormat.OpenXml.Drawing.Pictures;
+using UtilsVeicoliDLLProject;
 
 namespace VenditaVeicoliDLLProject
 {
@@ -208,38 +209,45 @@ namespace VenditaVeicoliDLLProject
             paragraphs.Add(p);
         }
 
-        public static Table createTable(MainDocumentPart mainPart, bool[] bolds, bool[] italics, bool[] underlines, string[] texts, JustificationValues[] justifications, int right, int cell, string rgbColor = "000000", BorderValues borderValues = BorderValues.Thick)
+
+        public static TableRow CreateRow(MainDocumentPart mainPart,string[] c, bool bolds, bool italics, bool underlines,JustificationValues justifications,int cell)
         {
-            if (bolds.Length == italics.Length && italics.Length == underlines.Length && underlines.Length == texts.Length)
+            TableRow tRow = new TableRow();
+            for (int j = 0; j < cell; j++)
             {
-                Table table = new Table();
-                // set table properties
-                table.AppendChild(getTableProperties(rgbColor, borderValues));
-
-                // row 1
-                int y = 0;
-                for (int i = 0; i < right; i++)
-                {
-                    TableRow tr = new TableRow();
-
-                    for (int j = 0; j < cell; j++)
-                    {
-                        AddStyle(mainPart, bolds[y], italics[y], underlines[y], $"0{y}", $"Table{y}");
-                        TableCell tc = new TableCell();
-                        Paragraph p = CreateParagraphWithStyle($"0{y}", justifications[y]);
-                        AddTextToParagraph(p, texts[y]);
-                        tc.Append(p);
-                        tr.Append(tc);
-                        y++;
-                    }
-
-                    table.Append(tr);
-                }
-                return table;
+                AddStyle(mainPart, bolds, italics, underlines, $"0{j}", $"Table{j}");
+                TableCell tc = new TableCell();
+                Paragraph p = CreateParagraphWithStyle($"0{j}", justifications);
+                AddTextToParagraph(p, c[j]);
+                tc.Append(p);
+                tRow.Append(tc);
+            }
+            return tRow;
+        }
+          
+        public static TableRow CreateHead(MainDocumentPart mainPart,bool bolds, bool italics, bool underlines,JustificationValues justifications,int cell)
+        {
+            TableRow tr=new TableRow();
+            string[] Head_Colonna = { "MARCA", "MODELLO", "COLORE", "CILINDRATA", "POTENZAKW", "IMMATRICOLAZIONE", "USATO", "KMZERO", "KM_PERCORSI", "NUMAIRBAG", "MARCASELLA", "PREZZO" };
+            for (int i = 0; i < cell; i++)
+            {
+                AddStyle(mainPart, bolds, italics, underlines, $"0{i}", $"Table{i}");
+                TableCell tc = new TableCell();
+                Paragraph p = CreateParagraphWithStyle($"0{i}", justifications);
+                AddTextToParagraph(p, Head_Colonna[i]);
+                tc.Append(p);
+                tr.Append(tc);
+            }
+            return tr;
+        }
+        public static Table createTable(MainDocumentPart mainPart, bool bolds, bool italics, bool underlines, string[] content, JustificationValues justifications, int right, int cell, string rgbColor = "000000", BorderValues borderValues = BorderValues.Thick)
+        {   
+                Table t = new Table();
+                t.Append(getTableProperties(rgbColor, borderValues));
+                t.Append(CreateHead(mainPart,bolds,italics,underlines,justifications,cell));
+                return t;
             }
 
-            return null;
-        }
 
         private static TableProperties getTableProperties(string rgbColor, BorderValues borderValues)
         {

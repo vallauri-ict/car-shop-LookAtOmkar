@@ -31,15 +31,18 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.NuovoVeicolo = new System.Windows.Forms.ToolStripButton();
-            this.ApriVeicolo = new System.Windows.Forms.ToolStripButton();
+            this.AggiornaPagina = new System.Windows.Forms.ToolStripButton();
             this.SalvaVeicolo = new System.Windows.Forms.ToolStripButton();
             this.StampaVeicolo = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnWeb = new System.Windows.Forms.ToolStripButton();
             this.ExportWord = new System.Windows.Forms.ToolStripButton();
-            this.ExporExcel = new System.Windows.Forms.ToolStripButton();
+            this.ExportExcel = new System.Windows.Forms.ToolStripButton();
+            this.ToolInfo = new System.Windows.Forms.ToolStripButton();
             this.dgvVeicoli = new System.Windows.Forms.DataGridView();
+            this.printDoc = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.toolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvVeicoli)).BeginInit();
             this.SuspendLayout();
@@ -49,14 +52,15 @@
             this.toolStrip.ImageScalingSize = new System.Drawing.Size(25, 25);
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.NuovoVeicolo,
-            this.ApriVeicolo,
+            this.AggiornaPagina,
             this.SalvaVeicolo,
             this.StampaVeicolo,
             this.toolStripSeparator,
             this.toolStripSeparator1,
             this.btnWeb,
             this.ExportWord,
-            this.ExporExcel});
+            this.ExportExcel,
+            this.ToolInfo});
             this.toolStrip.Location = new System.Drawing.Point(0, 0);
             this.toolStrip.Name = "toolStrip";
             this.toolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -74,15 +78,15 @@
             this.NuovoVeicolo.Text = "&Nuovo";
             this.NuovoVeicolo.Click += new System.EventHandler(this.NuovoVeicolo_Click);
             // 
-            // ApriVeicolo
+            // AggiornaPagina
             // 
-            this.ApriVeicolo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ApriVeicolo.Image = ((System.Drawing.Image)(resources.GetObject("ApriVeicolo.Image")));
-            this.ApriVeicolo.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ApriVeicolo.Name = "ApriVeicolo";
-            this.ApriVeicolo.Size = new System.Drawing.Size(29, 29);
-            this.ApriVeicolo.Text = "&Apri";
-            this.ApriVeicolo.Click += new System.EventHandler(this.ApriVeicolo_Click);
+            this.AggiornaPagina.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.AggiornaPagina.Image = ((System.Drawing.Image)(resources.GetObject("AggiornaPagina.Image")));
+            this.AggiornaPagina.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.AggiornaPagina.Name = "AggiornaPagina";
+            this.AggiornaPagina.Size = new System.Drawing.Size(29, 29);
+            this.AggiornaPagina.Text = "&Aggiorna";
+            this.AggiornaPagina.Click += new System.EventHandler(this.AggiornaPagina_Click);
             // 
             // SalvaVeicolo
             // 
@@ -92,7 +96,7 @@
             this.SalvaVeicolo.Name = "SalvaVeicolo";
             this.SalvaVeicolo.Size = new System.Drawing.Size(29, 29);
             this.SalvaVeicolo.Text = "&Salva";
-            this.SalvaVeicolo.Click += new System.EventHandler(this.SalvaVeicolo_Click);
+            this.SalvaVeicolo.Click += new System.EventHandler(this.Salva_Veicolo_Click);
             // 
             // StampaVeicolo
             // 
@@ -135,15 +139,24 @@
             this.ExportWord.Text = "toolStripButton1";
             this.ExportWord.Click += new System.EventHandler(this.ExportWord_Click);
             // 
-            // ExporExcel
+            // ExportExcel
             // 
-            this.ExporExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ExporExcel.Image = ((System.Drawing.Image)(resources.GetObject("ExporExcel.Image")));
-            this.ExporExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ExporExcel.Name = "ExporExcel";
-            this.ExporExcel.Size = new System.Drawing.Size(29, 29);
-            this.ExporExcel.Text = "toolStripButton2";
-            this.ExporExcel.Click += new System.EventHandler(this.ExporExcel_Click);
+            this.ExportExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ExportExcel.Image = ((System.Drawing.Image)(resources.GetObject("ExportExcel.Image")));
+            this.ExportExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ExportExcel.Name = "ExportExcel";
+            this.ExportExcel.Size = new System.Drawing.Size(29, 29);
+            this.ExportExcel.Text = "toolStripButton2";
+            this.ExportExcel.Click += new System.EventHandler(this.ExportExcel_Click);
+            // 
+            // ToolInfo
+            // 
+            this.ToolInfo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ToolInfo.Image = ((System.Drawing.Image)(resources.GetObject("ToolInfo.Image")));
+            this.ToolInfo.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ToolInfo.Name = "ToolInfo";
+            this.ToolInfo.Size = new System.Drawing.Size(29, 29);
+            this.ToolInfo.Click += new System.EventHandler(this.ToolInfo_Click);
             // 
             // dgvVeicoli
             // 
@@ -152,6 +165,20 @@
             this.dgvVeicoli.Name = "dgvVeicoli";
             this.dgvVeicoli.Size = new System.Drawing.Size(584, 211);
             this.dgvVeicoli.TabIndex = 2;
+            // 
+            // printDoc
+            // 
+            this.printDoc.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDoc_PrintPage);
+            // 
+            // printPreviewDialog
+            // 
+            this.printPreviewDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog.Enabled = true;
+            this.printPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog.Icon")));
+            this.printPreviewDialog.Name = "printPreviewDialog";
+            this.printPreviewDialog.Visible = false;
             // 
             // FormMain
             // 
@@ -175,7 +202,7 @@
         #endregion
         private System.Windows.Forms.ToolStrip toolStrip;
         private System.Windows.Forms.ToolStripButton NuovoVeicolo;
-        private System.Windows.Forms.ToolStripButton ApriVeicolo;
+        private System.Windows.Forms.ToolStripButton AggiornaPagina;
         private System.Windows.Forms.ToolStripButton SalvaVeicolo;
         private System.Windows.Forms.ToolStripButton StampaVeicolo;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
@@ -183,7 +210,10 @@
         private System.Windows.Forms.ToolStripButton btnWeb;
         public System.Windows.Forms.DataGridView dgvVeicoli;
         private System.Windows.Forms.ToolStripButton ExportWord;
-        private System.Windows.Forms.ToolStripButton ExporExcel;
+        private System.Windows.Forms.ToolStripButton ExportExcel;
+        private System.Drawing.Printing.PrintDocument printDoc;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog;
+        private System.Windows.Forms.ToolStripButton ToolInfo;
     }
 }
 

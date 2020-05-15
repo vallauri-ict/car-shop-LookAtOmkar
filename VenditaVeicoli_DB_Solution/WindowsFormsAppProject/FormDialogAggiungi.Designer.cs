@@ -32,8 +32,6 @@
             this.cmbTipoVeicolo = new System.Windows.Forms.ComboBox();
             this.btnAnnulla = new System.Windows.Forms.Button();
             this.btnAggiungi = new System.Windows.Forms.Button();
-            this.txtKmPercorsi = new System.Windows.Forms.MaskedTextBox();
-            this.txtPotenzakW = new System.Windows.Forms.MaskedTextBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.lblMarca = new System.Windows.Forms.Label();
             this.lblModello = new System.Windows.Forms.Label();
@@ -42,15 +40,13 @@
             this.lblKmPercorsi = new System.Windows.Forms.Label();
             this.Data_Time_Immatricolazione = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtCilindrata = new System.Windows.Forms.MaskedTextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtN_Airbag = new System.Windows.Forms.TextBox();
             this.txtMarcaSella = new System.Windows.Forms.TextBox();
             this.lblMarcaSella = new System.Windows.Forms.Label();
             this.lblData = new System.Windows.Forms.Label();
             this.lblAirbag = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblKmZero = new System.Windows.Forms.Label();
+            this.lblUsato = new System.Windows.Forms.Label();
             this.UsatoSI = new System.Windows.Forms.RadioButton();
             this.UsatoNO = new System.Windows.Forms.RadioButton();
             this.cmbMarca = new System.Windows.Forms.ComboBox();
@@ -61,8 +57,16 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblPrezzo = new System.Windows.Forms.Label();
             this.numUpDwPrice = new System.Windows.Forms.NumericUpDown();
+            this.txtKmPercorsi = new System.Windows.Forms.NumericUpDown();
+            this.txtPotenzakW = new System.Windows.Forms.NumericUpDown();
+            this.txtCilindrata = new System.Windows.Forms.NumericUpDown();
+            this.txtN_Airbag = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDwPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtKmPercorsi)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPotenzakW)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCilindrata)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtN_Airbag)).BeginInit();
             this.SuspendLayout();
             // 
             // cmbTipoVeicolo
@@ -98,20 +102,6 @@
             this.btnAggiungi.Text = "AGGIUNGI";
             this.btnAggiungi.UseVisualStyleBackColor = true;
             this.btnAggiungi.Click += new System.EventHandler(this.btnAggiungi_Click);
-            // 
-            // txtKmPercorsi
-            // 
-            this.txtKmPercorsi.Location = new System.Drawing.Point(96, 209);
-            this.txtKmPercorsi.Name = "txtKmPercorsi";
-            this.txtKmPercorsi.Size = new System.Drawing.Size(194, 20);
-            this.txtKmPercorsi.TabIndex = 4;
-            // 
-            // txtPotenzakW
-            // 
-            this.txtPotenzakW.Location = new System.Drawing.Point(96, 165);
-            this.txtPotenzakW.Name = "txtPotenzakW";
-            this.txtPotenzakW.Size = new System.Drawing.Size(194, 20);
-            this.txtPotenzakW.TabIndex = 5;
             // 
             // colorDialog1
             // 
@@ -178,14 +168,6 @@
             this.label1.TabIndex = 15;
             this.label1.Text = "TIPO DI VEICOLO:";
             // 
-            // txtCilindrata
-            // 
-            this.txtCilindrata.CausesValidation = false;
-            this.txtCilindrata.Location = new System.Drawing.Point(96, 247);
-            this.txtCilindrata.Name = "txtCilindrata";
-            this.txtCilindrata.Size = new System.Drawing.Size(194, 20);
-            this.txtCilindrata.TabIndex = 16;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -194,13 +176,6 @@
             this.label2.Size = new System.Drawing.Size(74, 13);
             this.label2.TabIndex = 17;
             this.label2.Text = "CILINDRATA:";
-            // 
-            // txtN_Airbag
-            // 
-            this.txtN_Airbag.Location = new System.Drawing.Point(96, 326);
-            this.txtN_Airbag.Name = "txtN_Airbag";
-            this.txtN_Airbag.Size = new System.Drawing.Size(185, 20);
-            this.txtN_Airbag.TabIndex = 18;
             // 
             // txtMarcaSella
             // 
@@ -236,23 +211,23 @@
             this.lblAirbag.TabIndex = 22;
             this.lblAirbag.Text = "N. AIRBAG:";
             // 
-            // label3
+            // lblKmZero
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(2, 416);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 13);
-            this.label3.TabIndex = 23;
-            this.label3.Text = "KM ZERO:";
+            this.lblKmZero.AutoSize = true;
+            this.lblKmZero.Location = new System.Drawing.Point(2, 416);
+            this.lblKmZero.Name = "lblKmZero";
+            this.lblKmZero.Size = new System.Drawing.Size(59, 13);
+            this.lblKmZero.TabIndex = 23;
+            this.lblKmZero.Text = "KM ZERO:";
             // 
-            // label4
+            // lblUsato
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(2, 442);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(47, 13);
-            this.label4.TabIndex = 24;
-            this.label4.Text = "USATO:";
+            this.lblUsato.AutoSize = true;
+            this.lblUsato.Location = new System.Drawing.Point(2, 442);
+            this.lblUsato.Name = "lblUsato";
+            this.lblUsato.Size = new System.Drawing.Size(47, 13);
+            this.lblUsato.TabIndex = 24;
+            this.lblUsato.Text = "USATO:";
             // 
             // UsatoSI
             // 
@@ -283,6 +258,7 @@
             this.cmbMarca.Name = "cmbMarca";
             this.cmbMarca.Size = new System.Drawing.Size(196, 21);
             this.cmbMarca.TabIndex = 29;
+            this.cmbMarca.SelectedIndexChanged += new System.EventHandler(this.cmbMarca_SelectedIndexChanged);
             // 
             // cmbModello
             // 
@@ -352,9 +328,62 @@
             // numUpDwPrice
             // 
             this.numUpDwPrice.Location = new System.Drawing.Point(94, 389);
+            this.numUpDwPrice.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
             this.numUpDwPrice.Name = "numUpDwPrice";
             this.numUpDwPrice.Size = new System.Drawing.Size(120, 20);
             this.numUpDwPrice.TabIndex = 35;
+            // 
+            // txtKmPercorsi
+            // 
+            this.txtKmPercorsi.Location = new System.Drawing.Point(94, 202);
+            this.txtKmPercorsi.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.txtKmPercorsi.Name = "txtKmPercorsi";
+            this.txtKmPercorsi.Size = new System.Drawing.Size(117, 20);
+            this.txtKmPercorsi.TabIndex = 36;
+            // 
+            // txtPotenzakW
+            // 
+            this.txtPotenzakW.Location = new System.Drawing.Point(94, 158);
+            this.txtPotenzakW.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.txtPotenzakW.Name = "txtPotenzakW";
+            this.txtPotenzakW.Size = new System.Drawing.Size(117, 20);
+            this.txtPotenzakW.TabIndex = 37;
+            // 
+            // txtCilindrata
+            // 
+            this.txtCilindrata.Location = new System.Drawing.Point(94, 240);
+            this.txtCilindrata.Maximum = new decimal(new int[] {
+            5000,
+            0,
+            0,
+            0});
+            this.txtCilindrata.Name = "txtCilindrata";
+            this.txtCilindrata.Size = new System.Drawing.Size(117, 20);
+            this.txtCilindrata.TabIndex = 38;
+            // 
+            // txtN_Airbag
+            // 
+            this.txtN_Airbag.Location = new System.Drawing.Point(94, 322);
+            this.txtN_Airbag.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.txtN_Airbag.Name = "txtN_Airbag";
+            this.txtN_Airbag.Size = new System.Drawing.Size(117, 20);
+            this.txtN_Airbag.TabIndex = 39;
             // 
             // FormDialogAggiungi
             // 
@@ -362,6 +391,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnAnnulla;
             this.ClientSize = new System.Drawing.Size(302, 505);
+            this.Controls.Add(this.txtN_Airbag);
+            this.Controls.Add(this.txtCilindrata);
+            this.Controls.Add(this.txtPotenzakW);
+            this.Controls.Add(this.txtKmPercorsi);
             this.Controls.Add(this.numUpDwPrice);
             this.Controls.Add(this.lblPrezzo);
             this.Controls.Add(this.groupBox1);
@@ -370,15 +403,13 @@
             this.Controls.Add(this.cmbColore);
             this.Controls.Add(this.cmbModello);
             this.Controls.Add(this.cmbMarca);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblUsato);
+            this.Controls.Add(this.lblKmZero);
             this.Controls.Add(this.lblAirbag);
             this.Controls.Add(this.lblData);
             this.Controls.Add(this.lblMarcaSella);
             this.Controls.Add(this.txtMarcaSella);
-            this.Controls.Add(this.txtN_Airbag);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtCilindrata);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Data_Time_Immatricolazione);
             this.Controls.Add(this.lblKmPercorsi);
@@ -386,8 +417,6 @@
             this.Controls.Add(this.lblColore);
             this.Controls.Add(this.lblModello);
             this.Controls.Add(this.lblMarca);
-            this.Controls.Add(this.txtPotenzakW);
-            this.Controls.Add(this.txtKmPercorsi);
             this.Controls.Add(this.btnAggiungi);
             this.Controls.Add(this.btnAnnulla);
             this.Controls.Add(this.cmbTipoVeicolo);
@@ -398,6 +427,10 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDwPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtKmPercorsi)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPotenzakW)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtCilindrata)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtN_Airbag)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -408,8 +441,6 @@
         private System.Windows.Forms.ComboBox cmbTipoVeicolo;
         private System.Windows.Forms.Button btnAnnulla;
         private System.Windows.Forms.Button btnAggiungi;
-        private System.Windows.Forms.MaskedTextBox txtKmPercorsi;
-        private System.Windows.Forms.MaskedTextBox txtPotenzakW;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Label lblMarca;
         private System.Windows.Forms.Label lblModello;
@@ -418,15 +449,13 @@
         private System.Windows.Forms.Label lblKmPercorsi;
         private System.Windows.Forms.DateTimePicker Data_Time_Immatricolazione;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.MaskedTextBox txtCilindrata;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtN_Airbag;
         private System.Windows.Forms.TextBox txtMarcaSella;
         private System.Windows.Forms.Label lblMarcaSella;
         private System.Windows.Forms.Label lblData;
         private System.Windows.Forms.Label lblAirbag;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblKmZero;
+        private System.Windows.Forms.Label lblUsato;
         private System.Windows.Forms.RadioButton UsatoSI;
         private System.Windows.Forms.RadioButton UsatoNO;
         private System.Windows.Forms.ComboBox cmbMarca;
@@ -437,5 +466,9 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lblPrezzo;
         private System.Windows.Forms.NumericUpDown numUpDwPrice;
+        private System.Windows.Forms.NumericUpDown txtKmPercorsi;
+        private System.Windows.Forms.NumericUpDown txtPotenzakW;
+        private System.Windows.Forms.NumericUpDown txtCilindrata;
+        private System.Windows.Forms.NumericUpDown txtN_Airbag;
     }
 }

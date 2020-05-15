@@ -14,8 +14,9 @@ namespace UtilsVeicoliDLLProject
     public class UtilsDatabase
     {
 
-        public static string connstr = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=Veicoli.accdb";
-
+        //di solito i file stanno all'interno del debug, ma visto che io l'ho messo fuori dal debug, bisogna fare in questo modo
+        public static string DataBaseFullPath = $"{Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName}\\Veicoli.accdb";
+        public static string connstr = $"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={DataBaseFullPath}";
         public static void VisualizzaConsoleListaVeicoli()
         {
             ///Lista visualizzata in Console 
@@ -36,7 +37,7 @@ namespace UtilsVeicoliDLLProject
                         {
 
                             Console.WriteLine("LISTA VEICOLI");
-                            Console.WriteLine("ID | MARCA | MODELLO | COLORE | CILINDRATA | POTENZAKW | IMMATRICOLAZIONE | USATO | KMZERO | KM_PERCORSI | NUMAIRBAG | MARCASELLA | PREZZO");
+                            Console.WriteLine("ID | TIPO | MARCA | MODELLO | COLORE | CILINDRATA | POTENZAKW | IMMATRICOLAZIONE | USATO | KMZERO | KM_PERCORSI | NUMAIRBAG | MARCASELLA | PREZZO");
                             while (reader.Read())
                             {
                                 Console.WriteLine("{0} | {1} | {2} | {3} | {4} | {5} | {6} | {7} | {8} | {9} | {10} | {11} | {12}",
@@ -54,7 +55,7 @@ namespace UtilsVeicoliDLLProject
                 }
                 catch (OleDbException exc)
                 {
-                    throw new Exception("Connessione interrott " + exc);
+                    throw new Exception("Connessione interrotta " + exc);
                 }
             }
 
@@ -72,7 +73,7 @@ namespace UtilsVeicoliDLLProject
                     OleDbCommand cmd = new OleDbCommand();
                     cmd.Connection = connection;
                     ///Comandi di eseguzione SQL
-                    cmd.CommandText = "DELETE * FROM Veicoli WHERE ID = " + id;
+                    cmd.CommandText = $"DELETE * FROM Veicoli WHERE ID ={id}";
                     cmd.ExecuteNonQuery();
                 }
 
@@ -83,6 +84,65 @@ namespace UtilsVeicoliDLLProject
             }
         }
 
+        private static void AddParametres(Veicolo v,OleDbCommand cmd)
+        {
+
+            cmd.Parameters.Add("@MARCA", OleDbType.VarChar, 255).Value = v.Marca;
+            cmd.Parameters.Add("@MODELLO", OleDbType.VarChar, 255).Value = v.Modello;
+            cmd.Parameters.Add("@COLORE", OleDbType.VarChar, 255).Value = v.Colore;
+            cmd.Parameters.Add("@POTENZAKW", OleDbType.Integer).Value = v.PotenzaKw;
+            cmd.Parameters.Add("@IMMATRICOLAZIONE", OleDbType.Date).Value = v.Immatricolazione;
+            cmd.Parameters.Add("@ISUSATO", OleDbType.Boolean).Value = v.IsUsato;
+            cmd.Parameters.Add("@ISKMZERO", OleDbType.Boolean).Value = v.IsKmZero;
+            cmd.Parameters.Add("@KM_PERCORSI", OleDbType.Integer).Value = v.KmPercorsi1;
+            if (v is Auto) /// Devo anche mettere i parametri che hanno diversamente sia l'auto che la moto.
+            {
+                cmd.Parameters.Add("@TIPO", OleDbType.VarChar, 255).Value = "AUTO";
+                cmd.Parameters.Add("@NUMAIRBAG", OleDbType.Integer).Value = (v as Auto).NumAirBag;
+                cmd.Parameters.Add("@MARCASELLA", OleDbType.VarChar, 255).Value = " ";
+            }
+            else if (v is Moto) //anche se è ovvio(se non è auto, di sicuro sarà una moto), lo scrivo comunque, per sicurezza
+            {
+                cmd.Parameters.Add("@TIPO", OleDbType.VarChar, 255).Value = "MOTO";
+                cmd.Parameters.Add("@NUMAIRBAG", OleDbType.Integer).Value = null;
+                cmd.Parameters.Add("@MARCASELLA", OleDbType.VarChar, 255).Value = (v as Moto).MarcaSella;
+            }
+        }
+
+        public static void AggiornaDataBase(Veicolo v,string tablename)
+        {
+            try
+            {
+                OleDbConnection connection = new OleDbConnection(connstr);
+                using(connection)
+                {
+                    OleDbCommand cmd = new OleDbCommand();
+                    cmd.Connection = connection;
+                    cmd.CommandText = $@"UPDATE {tablename} SET MARCA = @MARCA, MODELLO = @MODELLO, COLORE = @COLORE, CILINDRATA = @CILINDRATA, POTENZAKW = @POTENZAKW,
+                                        IMMATRICOLAZIONE = @IMMATRICOLAZIONE, USATO= @USATO, KMZERO=@KMZERO, NUMAIRBAG = @NUMAIRBAG, MARCASELLA = @MARCASELLA, PREZZO = @PREZZO";
+                    AddParametres(v,cmd);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch(OleDbException exc) { };
+        }
+
+
+        public static void EliminaDataBase(string tablename)
+        {
+            try
+            {
+                OleDbConnection connection = new OleDbConnection(connstr);
+                using(connection)
+                {
+                    OleDbCommand cmd = new OleDbCommand();
+                    cmd.Connection = connection;
+                    cmd.CommandText = $"DROP TABLE {tablename}";
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch(OleDbException exc) { }
+        }
         public static void AggiungiVeicolo(Veicolo v)
         {
             try
@@ -96,41 +156,57 @@ namespace UtilsVeicoliDLLProject
                     ///Comandi di eseguzione SQL
                     ///Inserisco tutti i dettagli dell'auto
                     //////inserisco tutti i dettagli del moto
-                    cmd.CommandText = @"INSERT INTO Veicoli(MARCA,MODELLO,COLORE,CILINDRATA,POTENZAKW,IMMATRICOLAZIONE,USATO,KMZERO,KM_PERCORSI,NUMAIRBAG,MARCASELLA,PREZZO)
-                                        VALUES(@MARCA,@MODELLO,@COLORE,@CILINDRATA,@POTENZAKW,@IMMATRICOLAZIONE,@ISUSATO,@ISKMZERO,@KM_PERCORSI,@NUMAIRBAG,@MARCASELLA,@PREZZO)";
-                    cmd.Parameters.Add("@MARCA", OleDbType.VarChar, 255).Value = v.Marca;
-                    cmd.Parameters.Add("@MODELLO", OleDbType.VarChar, 255).Value = v.Modello;
-                    cmd.Parameters.Add("@COLORE", OleDbType.VarChar, 255).Value = v.Colore;
-                    cmd.Parameters.Add("@POTENZAKW", OleDbType.Integer).Value = v.PotenzaKw;
-                    cmd.Parameters.Add("@IMMATRICOLAZIONE", OleDbType.Date).Value = v.Immatricolazione;
-                    cmd.Parameters.Add("@ISUSATO", OleDbType.Boolean).Value = v.IsUsato;
-                    cmd.Parameters.Add("@ISKMZERO", OleDbType.Boolean).Value = v.IsKmZero;
-                    cmd.Parameters.Add("@KM_PERCORSI", OleDbType.Integer).Value = v.KmPercorsi1;
-                    if (v is Auto) /// Devo anche mettere i parametri che hanno diversamente sia l'auto che la moto.
-                    {
-                        cmd.Parameters.Add("@NUMAIRBAG", OleDbType.Integer).Value = (v as Auto).NumAirBag;
-                        cmd.Parameters.Add("@MARCASELLA", OleDbType.VarChar, 255).Value = " ";
-                    }
-                    else if (v is Moto) //anche se è ovvio(se non è auto, di sicuro sarà una moto), lo scrivo comunque, per sicurezza
-                    {
-                        cmd.Parameters.Add("@NUMAIRBAG", OleDbType.Integer).Value = null;
-                        cmd.Parameters.Add("@MARCASELLA", OleDbType.VarChar, 255).Value = (v as Moto).MarcaSella;
-                    }
-
-
+                    cmd.CommandText = @"INSERT INTO Veicoli(TIPO,MARCA,MODELLO,COLORE,CILINDRATA,POTENZAKW,IMMATRICOLAZIONE,USATO,KMZERO,KM_PERCORSI,NUMAIRBAG,MARCASELLA,PREZZO)
+                                        VALUES(@TIPO,@MARCA,@MODELLO,@COLORE,@CILINDRATA,@POTENZAKW,@IMMATRICOLAZIONE,@ISUSATO,@ISKMZERO,@KM_PERCORSI,@NUMAIRBAG,@MARCASELLA,@PREZZO)";
+                    AddParametres(v,cmd);
                     cmd.Prepare();
                     cmd.ExecuteNonQuery();
                 }
             }
             catch (OleDbException exc)
             {
-                Console.WriteLine("Errore --->" + exc.Message);
+                throw new Exception("Errore --->" + exc.Message);
             }
+        }
+
+        //Serve per prendere i dati dal database, e caricarli su SerializeBindingList. Lo uso all'inizio di form_load, quando su dgv bisogna caricare i
+        // dati presi dal database.
+        public static SerializableBindingList<Veicolo> OpenDataBaseToList(SerializableBindingList<Veicolo> listaVeicoli)
+        {
+            if (connstr != null)
+            {
+                OleDbConnection connection = new OleDbConnection(connstr);
+                using (connection)
+                {
+                    connection.Open();
+                    OleDbCommand cmd = new OleDbCommand();
+                    try
+                    {
+                        OleDbDataReader rd = cmd.ExecuteReader();
+                        while (rd.Read()) //finchè ci sono le righe
+                        {
+                            if (rd.GetString(1) == "AUTO")
+                            {
+                                listaVeicoli.Add(new Auto(rd.GetString(1), rd.GetString(2), rd.GetString(3), rd.GetInt32(4), rd.GetDouble(5),
+                                                     rd.GetDateTime(6), rd.GetBoolean(7), rd.GetBoolean(8), rd.GetInt32(9), rd.GetInt32(10), rd.GetInt32(11)));
+                            }
+                            else if (rd.GetString(1) == "MOTO")
+                            {
+                                listaVeicoli.Add(new Moto(rd.GetString(1), rd.GetString(2), rd.GetString(3), rd.GetInt32(4), rd.GetDouble(5),
+                                                     rd.GetDateTime(6), rd.GetBoolean(7), rd.GetBoolean(8), rd.GetInt32(9), rd.GetString(10), rd.GetInt32(11)));
+                            }
+                        }
+                        rd.Close();
+                    }
+                    catch (OleDbException exc) { };
+                }
+            }
+            return listaVeicoli;
         }
 
 
 
-        public static void CreaTabella()
+        public static void CreaTabella(string tablename)
         {
             if (connstr != null)
             {
@@ -143,8 +219,9 @@ namespace UtilsVeicoliDLLProject
                     ///Comandi di eseguzione SQL
                     try
                     {
-                        cmd.CommandText = @"CREATE TABLE Veicoli(
-                                     ID INT NOT NULL PRIMARY KEY,
+                        cmd.CommandText = $@"CREATE TABLE {tablename}(
+                                     ID INT NOT NULL AUTO_INCREMENT,
+                                     TIPO VARCHAR(255) NOT NULL,
                                      MARCA  VARCHAR(255) NOT NULL,
                                      MODELLO VARCHAR(255) NOT NULL,
                                      COLORE VARCHAR(255) NOT NULL,
@@ -157,12 +234,14 @@ namespace UtilsVeicoliDLLProject
                                      NUMAIRBAG INT,
                                      MARCASELLA VARCHAR(255) NOT NULL,
                                      PREZZO INT NOT NULL,
+                                     PRIMARY KEY (ID)
                                      )";
                         cmd.ExecuteNonQuery();
                     }
                     catch (OleDbException exc)
                     {
-                        Console.WriteLine("ERRORE --> " + exc.Message);
+                        throw new Exception(exc.Message);
+                        System.Threading.Thread.Sleep(2000);
                     }
                 }
             }

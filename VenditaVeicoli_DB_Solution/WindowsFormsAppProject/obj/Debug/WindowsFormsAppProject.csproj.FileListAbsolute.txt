@@ -60,3 +60,10 @@ C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaV
 C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\WindowsFormsAppProject\obj\Debug\WindowsFormsAppProject.csproj.CopyComplete
 C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\WindowsFormsAppProject\obj\Debug\WindowsFormsAppProject.exe
 C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\WindowsFormsAppProject\obj\Debug\WindowsFormsAppProject.pdb
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\WindowsFormsAppProject\bin\Debug\DocumentFormat.OpenXml.dll
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\WindowsFormsAppProject\bin\Debug\System.IO.Packaging.dll
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\WindowsFormsAppProject\bin\Debug\UtilsVeicoliDLLProject.dll
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\WindowsFormsAppProject\bin\Debug\UtilsVeicoliDLLProject.pdb
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\WindowsFormsAppProject\bin\Debug\DocumentFormat.OpenXml.xml
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\WindowsFormsAppProject\bin\Debug\System.IO.Packaging.xml
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\WindowsFormsAppProject\obj\Debug\WindowsFormsAppProject.Form_Info.resources

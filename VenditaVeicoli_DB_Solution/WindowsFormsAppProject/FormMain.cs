@@ -14,12 +14,20 @@ using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using DocumentFormat.OpenXml.Spreadsheet;
+using System.Drawing.Printing;
 
 namespace WindowsFormsAppProject
 {
     public partial class FormMain : Form
     {
-        SerializableBindingList<Veicolo> BindingListVeicoli;
+        public static SerializableBindingList<Veicolo> BindingListVeicoli;
+
+        private System.Drawing.Font printFont;
+        private string stringToPrint;
+        public static string filePath;
+        private PrintPreviewDialog printPreviewDialog1 = new PrintPreviewDialog();
+        private PrintDocument pd = new PrintDocument();
+
         public FormMain()
         {
             InitializeComponent();
@@ -28,24 +36,41 @@ namespace WindowsFormsAppProject
             dgvVeicoli.AutoResizeRows();
             dgvVeicoli.ClearSelection();
             dgvVeicoli.RowHeadersVisible = false;
+            pd.PrintPage += new PrintPageEventHandler(this.printDoc_PrintPage);
         }
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            caricaDatiDiTest();
+            BindingListVeicoli.Clear();
+            dgvVeicoli.DataSource = null;
+            caricaDatiDiTest(); // TRADIZIONALE
+            
+            // A causa del provider, non mi permette alla connessione al database, il quale il motivo non so ancora, dopo aver consultato con alcuni.
+            //UtilsDatabase.CreaTabella("Veicoli");
+            //CaricaDati(); //TRAMITE IL DATABASE
         }
 
         private void caricaDatiDiTest()
         {
-            //UtilsDatabase.CreaTabella();
             Moto m = new Moto();
             BindingListVeicoli.Add(m);
             m = new Moto("HONDA", "Tsunami", "Rosso", 1000, 120, DateTime.Now, false, false, 0, "Quintino", 15000);
             BindingListVeicoli.Add(m);
-            //UtilsDatabase.AggiungiVeicolo(m);
+            //UtilsDatabase.AggiungiVeicolo(m); Problemi di provider.
             Auto a = new Auto("JEEP", "Compass", "Blue", 2400, 160.10, DateTime.Now, false, false, 0, 8, 30000);
             BindingListVeicoli.Add(a);
-            //UtilsDatabase.AggiungiVeicolo(a);
+
+            //UtilsDatabase.AggiungiVeicolo(a); Problemi di provider, e per evitare che si interrompesse, l'ho messo come commento.
+
+            dgvVeicoli.DataSource = BindingListVeicoli;
+
+        }
+
+        private void CaricaDati()
+        {
+            ///prendo i dati dal database  e li carico su bindinglistveicoli
+            BindingListVeicoli = UtilsDatabase.OpenDataBaseToList(BindingListVeicoli);
+            ///Carico su dgv
             dgvVeicoli.DataSource = BindingListVeicoli;
             
         }
@@ -55,76 +80,109 @@ namespace WindowsFormsAppProject
             dialogoAggiungi.ShowDialog();
         }
 
-        private void ApriVeicolo_Click(object sender, EventArgs e)
+        private void AggiornaPagina_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Apri........");
-            OpenFileDialog file = new OpenFileDialog();
-            file.ShowDialog();
-            try
+            ///aggiornare la pagina
+            DialogResult=MessageBox.Show("Desideri di Salvare i dati prima di aprire ?","Warning",MessageBoxButtons.YesNoCancel,MessageBoxIcon.Question);
+            if(DialogResult == DialogResult.Yes)
             {
-                StreamReader sr = new StreamReader(file.FileName);
-                while (sr.Peek() > -1)
-                {
-                    ///
-                }
-                sr.Close();
-            }
-            catch
-            {
-                MessageBox.Show("File non selezionato");
+                Salva();
+                MessageBox.Show("Apertura del file, Attendi");
+                dgvVeicoli.DataSource = null;
+                this.FormMain_Load(this,new EventArgs()); ///Ricarica la pagina
+                MessageBox.Show("File Aperto", "Apertura",MessageBoxButtons.OK,MessageBoxIcon.Information);
             }
         }
 
-        private void SalvaVeicolo_Click(object sender, EventArgs e)
+        private void Salva()
         {
-            Utils.SerializeToCsv(BindingListVeicoli, @".\Veicoli.csv");
-            //Utils.SerializeToXml(BindingListVeicoli, @".\veicoli.xml");
-            Utils.SerializeToJson(BindingListVeicoli, @".\veicoli.json");
+
+            Utils.SerializeToCsv(BindingListVeicoli, @".\Data\Veicoli.csv");
+            Utils.SerializeToJson(BindingListVeicoli, @".\Data\veicoli.json");
+            Utils.SalvaVeicoloInFileTXT<Veicolo>(BindingListVeicoli, @".\Data\Veicoli_Stampa.txt");
+            /// SALVATAGGIO LISTA IN JSON , Nella Cartella wwww per il sito //
+            string json = @".\www\index.json";
+            Utils.SerializeToJson(BindingListVeicoli, json);
+            MessageBox.Show("File salvato correttamente");
             ///DEVO INSERIRE UNA FUNZIONE CHE MI PERMETTA DI SALVARE IL DATABASE DI VEICOLI
+            
+            //UtilsDatabase.AggiornaDataBase("Veicoli"); // problemi con il provider
+        }
+        private void Salva_Veicolo_Click(object sender, EventArgs e)
+        {
+            Salva();
         }
 
         private void StampaVeicolo_Click(object sender, EventArgs e)
         {
-            /// SALVATAGGIO LISTA IN JSON//
-            string json = @".\www\index.json";
-            Utils.SerializeToJson(BindingListVeicoli, json);
-            MessageBox.Show("File salvato in json");
-
             //--------------------STAMPA-----------------------
-        }
-        private string immagine(string marca)
-        {
-            string s = "";
-            switch (marca)
-            {
-                case "DUCATI":
-                    {
-                        s += "style='backgroud-image:url(../www/css/ducati1.jpg)';";
-                        break;
-                    }
-                case "JEEP":
-                    {
-                        s += "style='backgroud-image:url(../www/css/jeep1.jpg)';";
-                        break;
-                    }
-                case "HONDA":
-                    {
-                        s += "style='backgroud-image:url(../www/css/honda1.jpg)';";
-                        break;
-                    }
-                case "MERCEDES":
-                    {
-                        s += "style='backgroud-image:url(../www/css/mercedes1.jpg)';";
-                        break;
-                    }
-            }
-            return s;
+
+            //Prima di stampare un file, salvo la lista in file .txt
+            Utils.SalvaVeicoloInFileTXT<Veicolo>(BindingListVeicoli, @".\Data\Veicoli_Stampa.txt");
+            Stampa();
         }
 
-        private string ScriviHTML(string html, int i)
+
+        private void Stampa()
+        {
+            try
+            {
+                string docName = @".\Data\Veicoli_Stampa.txt";
+                printFont = new System.Drawing.Font("Times new Romans", 18, FontStyle.Bold);
+                pd.DocumentName = docName;
+                using (FileStream stream = new FileStream(docName, FileMode.Open))
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    stringToPrint = reader.ReadToEnd();
+                }
+                printPreviewDialog.Document = pd;
+                printPreviewDialog.ShowDialog();
+
+                ///STAMPO DEL DOCUMENTO
+                if (printPreviewDialog.ShowDialog() == DialogResult.OK)
+                    pd.Print();
+                else
+                    this.Close();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.Message);
+            }
+        }
+
+        private void printDoc_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            int charactersOnPage = 0;
+            int linesPerPage = 0;
+
+            // Sets the value of charactersOnPage to the number of characters
+            // of stringToPrint that will fit within the bounds of the page.
+            e.Graphics.MeasureString(stringToPrint, this.Font,
+                e.MarginBounds.Size, StringFormat.GenericTypographic,
+                out charactersOnPage, out linesPerPage);
+
+            // Draws the string within the bounds of the page.
+            e.Graphics.DrawString(stringToPrint, this.Font, Brushes.Black,
+            e.MarginBounds, StringFormat.GenericTypographic);
+
+            // Remove the portion of the string that has been printed.
+            stringToPrint = stringToPrint.Substring(charactersOnPage);
+
+            // Check to see if more pages are to be printed.
+            e.HasMorePages = (stringToPrint.Length > 0);
+
+            // If there are no more pages, reset the string to be printed.
+            if (!e.HasMorePages)
+                stringToPrint = stringToPrint;
+        }
+
+
+        
+
+        private string ScriviHTML(string html, int i,int vehicles)
         {
             string s = "";
-            s += "<div class='Body-content'><div class='" + html + "'></div>";
+            s += $"<div class='Body-content' id='{i}'><div class='{html}'></div>";
             s += "<div class='Dettagli'><p> Marca:" +
                  BindingListVeicoli[i].Marca + "\n  MODELLO: "
                  + BindingListVeicoli[i].Modello + "\n  POTENZA KW: " +
@@ -156,28 +214,36 @@ namespace WindowsFormsAppProject
             html = html.Replace("{{body-title}}", "SALONE VALLAURI-VEICOLI NUOVI E USATI");
             html = html.Replace("{{body-subtitle}}", "le migliori occasioni al miglior prezzo");
             ///---------------Dati----------------
+            int nDucati=0;
+            int nJeep=0;
+            int nMercedes=0;
+            int nHonda=0;
             for (int i = 0; i < BindingListVeicoli.Count; i++)
             {
                 switch (BindingListVeicoli[i].Marca)
                 {
                     case "DUCATI":
                         {
-                            s += ScriviHTML("DUCATI", i);
+                            s += ScriviHTML("DUCATI", nDucati,i);
+                            nDucati++;
                             break;
                         }
                     case "JEEP":
                         {
-                            s += ScriviHTML("JEEP", i);
+                            s += ScriviHTML("JEEP", nJeep,i);
+                            nJeep++;
                             break;
                         }
                     case "MERCEDES":
                         {
-                            s += ScriviHTML("MERCEDES", i);
+                            s += ScriviHTML("MERCEDES", nMercedes,i);
+                            nMercedes++;
                             break;
                         }
                     case "HONDA":
                         {
-                            s += ScriviHTML("HONDA", i);
+                            s += ScriviHTML("HONDA", nHonda,i);
+                            nHonda++;
                             break;
                         }
                 }
@@ -190,7 +256,7 @@ namespace WindowsFormsAppProject
 
         private void ExportWord_Click(object sender, EventArgs e)
         {
-            using(WordprocessingDocument doc = WordprocessingDocument.Create("Volantino_Veicoli.docx",WordprocessingDocumentType.Document))
+            using (WordprocessingDocument doc = WordprocessingDocument.Create(@".\Data\Volantino_Veicoli.docx", WordprocessingDocumentType.Document))
             {
                 ///CREATION AND STRUCTURE OF WORD DOC
                 MainDocumentPart mainPart = doc.AddMainDocumentPart();
@@ -199,27 +265,92 @@ namespace WindowsFormsAppProject
                 mainPart.Document.AppendChild(docBody);
                 ///Description of doC
                 ///TITLE
-                Paragraph Header_p = UtilsWord.CreateParagraphWithStyle("Heading",JustificationValues.Center);
-                UtilsWord.AddTextToParagraph(Header_p,"VOLANTINO VEICOLI NUOVI E USATI ");
+                Paragraph Header_p = UtilsWord.CreateParagraphWithStyle("Heading", JustificationValues.Center);
+                UtilsWord.AddTextToParagraph(Header_p, "VOLANTINO VEICOLI NUOVI E USATI ");
                 docBody.AppendChild(Header_p);
 
                 ///SUBTITLE
-                Paragraph SubHeader_p = UtilsWord.CreateParagraphWithStyle("Content",JustificationValues.Center);
-                UtilsWord.AddTextToParagraph(SubHeader_p,"Qui troverete i dati di tutti i veicoli nuovi e usati che abbiamo in disposizione");
+                Paragraph SubHeader_p = UtilsWord.CreateParagraphWithStyle("Content", JustificationValues.Center);
+                UtilsWord.AddTextToParagraph(SubHeader_p, "Qui troverete i dati di tutti i veicoli nuovi e usati che abbiamo in disposizione");
                 docBody.AppendChild(SubHeader_p);
-                
-                ///CONTENT
 
+                ///CONTENT
+                Paragraph content = UtilsWord.CreateParagraphWithStyle("Content", JustificationValues.Center);
+                DocumentFormat.OpenXml.Wordprocessing.Table tabella = new DocumentFormat.OpenXml.Wordprocessing.Table();
+                string[] cars = new string[12];
+                tabella = UtilsWord.createTable(mainPart, true, false, false, cars, JustificationValues.Center, BindingListVeicoli.Count, cars.Length);
+                for (int i = 0; i < BindingListVeicoli.Count; i++)
+                {
+                    cars = Utils.ConvertVeicoliToString(BindingListVeicoli, i);
+                    tabella.Append(UtilsWord.CreateRow(mainPart, cars, false, false, false, JustificationValues.Center, cars.Length));
+                }
+                docBody.AppendChild(tabella);
+
+                Paragraph footer = UtilsWord.CreateParagraphWithStyle("Footer", JustificationValues.Left);
+                UtilsWord.AddTextToParagraph(footer, "Created by Omkar Singh Rathore \n 2019-20 School-Project");
+                docBody.AppendChild(footer);
+                //UtilsWord.CreateBulletOrNumberedList();
+                MessageBox.Show("I dati sono stati esportati in Document Word, Correttamente");
+                DialogResult response = MessageBox.Show("Desideri di aprire il file .doc ? ", "Dettagli", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (response == DialogResult.Yes)
+                {
+                    System.Diagnostics.Process.Start(@".\Data\Volantino_Veicoli.docx");
+                }
 
             }
         }
 
-        private void ExporExcel_Click(object sender, EventArgs e)
+        private void ExportExcel_Click(object sender, EventArgs e)
         {
-            UtilsExcel.CreateExcelFile<Veicolo>(BindingListVeicoli.ToList(),"Cars_Details.xlsx"); ///HO CONVERTITO LA SERIALIZEBINDINGLIST IN LIST, DATO CHE NELLA LIBRERIA DI EXCEL, RICHIEDEVA COME PARAMETRO UNA LIST.
-            MessageBox.Show("I Dati sono stati esportati in File Excel correttamente");
-            System.Diagnostics.Process.Start("Cars_Details.xlsx");
-                
+            using (SpreadsheetDocument doc = SpreadsheetDocument.Create(@".\Data\Cars_Details.xlsx", SpreadsheetDocumentType.Workbook))
+            {
+                //Add WorkbookPart to the document
+                WorkbookPart mainpart = doc.AddWorkbookPart();
+                mainpart.Workbook = new Workbook();
+
+                // Add a WorksheetPart to the WorkbookPart
+                SheetData SheetData = new SheetData();
+                WorksheetPart worksheetpart = mainpart.AddNewPart<WorksheetPart>();
+                worksheetpart.Worksheet = new Worksheet(SheetData);
+
+                // Add Sheets to the Workbook.
+                Sheets sheets = doc.WorkbookPart.Workbook.AppendChild<Sheets>(new Sheets());
+
+                // Append a new worksheet and associate it with the workbook.
+                Sheet sheet = new Sheet()
+                {
+                    Id = doc.WorkbookPart.GetIdOfPart(worksheetpart),
+                    SheetId = 1,
+                    Name = "MySheet"
+                };
+                // Add Stylesheet on workbook
+                WorkbookStylesPart stylesPart = UtilsExcel.addStylesheet(mainpart);
+                UtilsExcel.CreateHeader(SheetData,mainpart);
+                string[] car = new string[12];
+                for (int i = 0; i < BindingListVeicoli.Count; i++)
+                {
+                    car =Utils.ConvertVeicoliToString(BindingListVeicoli,i);
+                    UtilsExcel.CreateContent(SheetData,mainpart,car);
+                }
+                sheets.Append(sheet);
+                mainpart.Workbook.Save();
+                // Close the document.
+                doc.Close();
+                MessageBox.Show("I Dati sono stati esportati in File Excel correttamente");
+                DialogResult = MessageBox.Show("Desideri di aprire il file .xlsx","Dettagli",MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
+                if(DialogResult == DialogResult.Yes)
+                {
+                    System.Diagnostics.Process.Start(@".\Data\Cars_Details.xlsx");
+                }
+
+            }
+        }
+
+        private void ToolInfo_Click(object sender, EventArgs e)
+        {
+            Form_Info frm = new Form_Info();
+            this.AddOwnedForm(frm);
+            frm.ShowDialog();
         }
     }
 }

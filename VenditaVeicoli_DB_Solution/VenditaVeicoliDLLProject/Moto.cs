@@ -16,7 +16,7 @@ namespace VenditaVeicoliDLLProject
             "Nero",
             1000,
             75.20,
-            new DateTime(),
+            DateTime.Now,
             false,
             false,
             0,

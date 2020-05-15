@@ -1,0 +1,11 @@
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\Utils_Veicoli\bin\Debug\netstandard2.0\UtilsVeicoliDLLProject.deps.json
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\Utils_Veicoli\bin\Debug\netstandard2.0\UtilsVeicoliDLLProject.dll
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\Utils_Veicoli\bin\Debug\netstandard2.0\UtilsVeicoliDLLProject.pdb
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\Utils_Veicoli\bin\Debug\netstandard2.0\VenditaVeicoliDLLProject.dll
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\Utils_Veicoli\bin\Debug\netstandard2.0\VenditaVeicoliDLLProject.pdb
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\Utils_Veicoli\obj\Debug\netstandard2.0\UtilsVeicoliDLLProject.csprojAssemblyReference.cache
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\Utils_Veicoli\obj\Debug\netstandard2.0\UtilsVeicoliDLLProject.AssemblyInfoInputs.cache
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\Utils_Veicoli\obj\Debug\netstandard2.0\UtilsVeicoliDLLProject.AssemblyInfo.cs
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\Utils_Veicoli\obj\Debug\netstandard2.0\UtilsVeicoliDLLProject.csproj.CopyComplete
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\Utils_Veicoli\obj\Debug\netstandard2.0\UtilsVeicoliDLLProject.dll
+C:\Users\Rathore\Desktop\SCUOLA\Scuola-4B INF\INFORMATICA\DATABASE--SQL\VenditaVeicoli_DB_Solution\Utils_Veicoli\obj\Debug\netstandard2.0\UtilsVeicoliDLLProject.pdb
