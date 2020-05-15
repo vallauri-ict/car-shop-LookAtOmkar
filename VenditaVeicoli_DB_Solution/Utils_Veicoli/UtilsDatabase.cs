@@ -245,11 +245,6 @@ namespace UtilsVeicoliDLLProject
                     }
                 }
             }
-            else
-            {
-                Console.WriteLine("Problemi di connessione");
-            }
-
         }
     }
 }

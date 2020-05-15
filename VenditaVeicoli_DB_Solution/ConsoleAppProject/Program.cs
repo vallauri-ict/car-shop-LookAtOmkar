@@ -65,24 +65,27 @@ namespace ConsoleAppProject
                         }
                     case '4':
                         {
-                            //Esclusivamente usato per console
-                            UtilsDatabase.VisualizzaConsoleListaVeicoli();
+                            ///Update Table
+                            Veicolo v;
+                            v = AddParamtresConsole();
+                            UtilsDatabase.AggiornaDataBase(v,"Veicoli");
+                            Console.WriteLine("Database aggiornato correttamente");
                             Console.ReadKey();
                             break;
                         }
                     case '5':
                         {
-                            ///Update Table
-                            Veicolo v;
-                            v = AddParamtresConsole();
-                            UtilsDatabase.AggiornaDataBase(v,"Veicoli");
+                            ///Destroy Table
+                            UtilsDatabase.EliminaDataBase("Veicolo");
+                            Console.WriteLine("Il database è stato eliminato con successo");
                             Console.ReadKey();
                             break;
                         }
                     case '6':
                         {
-                            ///Destroy Table
-                            UtilsDatabase.EliminaDataBase("Veicolo");
+                            //Esclusivamente usato per console
+                            UtilsDatabase.VisualizzaConsoleListaVeicoli();
+                            Console.WriteLine("Ecco la lista dei veicoli");
                             Console.ReadKey();
                             break;
                         }

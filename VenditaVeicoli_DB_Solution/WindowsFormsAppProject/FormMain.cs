@@ -83,7 +83,7 @@ namespace WindowsFormsAppProject
         private void AggiornaPagina_Click(object sender, EventArgs e)
         {
             ///aggiornare la pagina
-            DialogResult=MessageBox.Show("Desideri di Salvare i dati prima di aprire ?","Warning",MessageBoxButtons.YesNoCancel,MessageBoxIcon.Question);
+            DialogResult=MessageBox.Show("Desideri di Salvare i dati prima di aprire ?","Warning",MessageBoxButtons.YesNoCancel,MessageBoxIcon.Warning);
             if(DialogResult == DialogResult.Yes)
             {
                 Salva();
@@ -291,7 +291,7 @@ namespace WindowsFormsAppProject
                 docBody.AppendChild(footer);
                 //UtilsWord.CreateBulletOrNumberedList();
                 MessageBox.Show("I dati sono stati esportati in Document Word, Correttamente");
-                DialogResult response = MessageBox.Show("Desideri di aprire il file .doc ? ", "Dettagli", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult response = MessageBox.Show("Desideri di aprire il file .docx ? ", "Dettagli", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (response == DialogResult.Yes)
                 {
                     System.Diagnostics.Process.Start(@".\Data\Volantino_Veicoli.docx");
@@ -337,7 +337,7 @@ namespace WindowsFormsAppProject
                 // Close the document.
                 doc.Close();
                 MessageBox.Show("I Dati sono stati esportati in File Excel correttamente");
-                DialogResult = MessageBox.Show("Desideri di aprire il file .xlsx","Dettagli",MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
+                DialogResult = MessageBox.Show("Desideri di aprire il file .xlsx","Dettagli",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
                 if(DialogResult == DialogResult.Yes)
                 {
                     System.Diagnostics.Process.Start(@".\Data\Cars_Details.xlsx");
